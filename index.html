@@ -13,9 +13,6 @@
     <link rel="shortcut icon" href="/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="/favicon.png">
 
-    <!-- Lucide Icons Library -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
     <style>
         :root {
             --bg-color: #0f172a;
@@ -45,43 +42,36 @@
             padding: 20px;
         }
 
-        /* Banner Container */
-        .banner-container {
-            width: 100%;
-            max-height: 350px;
-            overflow: hidden;
-            border-radius: 16px;
-            margin-bottom: 25px;
-            border: 1px solid #334155;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        /* Small Top Banner / Logo Styling */
+        .logo-banner-container {
+            background-color: #ffffff;
+            display: inline-block;
+            padding: 8px 24px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
 
-        .banner-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .logo-banner-img {
+            height: 55px; /* Compact logo size */
+            width: auto;
             display: block;
+            object-fit: contain;
         }
 
         /* Hero Section */
         header {
             text-align: center;
-            padding: 40px 20px;
+            padding: 35px 20px 40px 20px;
             background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
             border-bottom: 1px solid #334155;
             border-radius: 0 0 20px 20px;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            color: var(--text-main);
-            margin-bottom: 10px;
-        }
-
         .tagline {
             font-size: 1.2rem;
             color: var(--accent);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             font-weight: bold;
         }
 
@@ -235,7 +225,6 @@
             flex-shrink: 0;
         }
 
-        .contact-icon-svg.globe { color: #38bdf8; }
         .contact-icon-svg.instagram { color: #e1306c; }
         .contact-icon-svg.mail { color: var(--accent); }
 
@@ -253,7 +242,11 @@
 
     <header>
         <div class="container">
-            <h1>QSkip</h1>
+            <!-- Small Header Banner / Logo on White Background -->
+            <div class="logo-banner-container">
+                <img src="banner.png" alt="QSkip Logo" class="logo-banner-img">
+            </div>
+
             <div class="tagline">ციფრული რიგების პლატფორმა</div>
             <p style="max-width: 700px; margin: 0 auto; text-align: center;">
                 გუნდი: <strong>ფიზმათGPT</strong>
@@ -266,11 +259,6 @@
     </header>
 
     <div class="container">
-
-        <!-- Banner Image -->
-        <div class="banner-container">
-            <img src="banner.png" alt="QSkip Banner" class="banner-img">
-        </div>
 
         <div class="grid">
             
@@ -345,13 +333,7 @@
                     <h2>კონტაქტი</h2>
                     <p>საერთო კითხვებისა და თანამშრომლობისთვის მოგვწერეთ ან ეწვიეთ ჩვენს გვერდებს:</p>
                     <div class="contact-links-list">
-                        <!-- Website -->
-                        <a href="https://qskip.ge" target="_blank" rel="noopener noreferrer" class="contact-link-item">
-                            <svg class="contact-icon-svg globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                            <span>qskip.ge</span>
-                        </a>
-
-                        <!-- Instagram Direct Inline SVG Fix -->
+                        <!-- Instagram Link -->
                         <a href="https://www.instagram.com/qskip_/" target="_blank" rel="noopener noreferrer" class="contact-link-item">
                             <svg class="contact-icon-svg instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                             <span>@qskip_</span>
