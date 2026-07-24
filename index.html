@@ -6,10 +6,11 @@
     <title>QSkip - ციფრული რიგების პლატფორმა</title>
 
     <!-- Meta Description for Google Search Results -->
-    <meta name="description" content="QSkip არის ციფრული რიგების პლატფორმა, რომელიც საშუალებას აძლევს მომხმარებელს ონლაინ დადგეს ნებისმიერი პარტნიორი ობიექტის რიგში და თავიდან აიცილოს ფიზიკურ სივრცეში ლოდინი. QSkip is A digital queuing platform that allows customers to stand in line at any partner facility/business online and avoid waiting in a physical space.">
+    <meta name="description" content="QSkip არის ციფრული რიგების პლატფორმა, რომელიც საშუალებას აძლევს მომხმარებელს ონლაინ „დადგეს“ ნებისმიერი პარტნიორი ობიექტის რიგში და თავიდან აიცილოს ფიზიკურ სივრცეში ლოდინი.">
 
-    <!-- Favicon Settings for Google Search and Browsers -->
-    <link rel="icon" type="image/png" sizes="any" href="/favicon.png">
+    <!-- Favicon Settings for Google Search (Ensure favicon.png is at least 48x48px or 192x192px) -->
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="/favicon.png">
 
     <!-- Lucide Icons Library -->
@@ -44,10 +45,28 @@
             padding: 20px;
         }
 
+        /* Banner Container */
+        .banner-container {
+            width: 100%;
+            max-height: 350px;
+            overflow: hidden;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         /* Hero Section */
         header {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
             background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
             border-bottom: 1px solid #334155;
             border-radius: 0 0 20px 20px;
@@ -91,7 +110,7 @@
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: 30px;
-            margin-top: 40px;
+            margin-top: 30px;
         }
 
         @media (max-width: 900px) {
@@ -205,24 +224,20 @@
             transform: translateX(4px);
         }
 
-        .contact-icon {
+        .contact-icon-svg {
             width: 20px;
             height: 20px;
+            fill: none;
+            stroke: currentColor;
             stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
             flex-shrink: 0;
         }
 
-        .contact-icon.globe {
-            color: #38bdf8;
-        }
-
-        .contact-icon.instagram {
-            color: #e1306c;
-        }
-
-        .contact-icon.mail {
-            color: var(--accent);
-        }
+        .contact-icon-svg.globe { color: #38bdf8; }
+        .contact-icon-svg.instagram { color: #e1306c; }
+        .contact-icon-svg.mail { color: var(--accent); }
 
         footer {
             text-align: center;
@@ -251,6 +266,12 @@
     </header>
 
     <div class="container">
+
+        <!-- Banner Image -->
+        <div class="banner-container">
+            <img src="banner.png" alt="QSkip Banner" class="banner-img">
+        </div>
+
         <div class="grid">
             
             <!-- მარცხენა ძირითადი სვეტი -->
@@ -318,18 +339,27 @@
                 </section>
             </main>
 
-            <!-- მარჯვენა დამხმარე სვეტი (ბიზნეს მოდელი & სტრატეგია) -->
+            <!-- მარჯვენა დამხმარე სვეტი -->
             <aside>
                 <section class="sidebar-section">
                     <h2>კონტაქტი</h2>
                     <p>საერთო კითხვებისა და თანამშრომლობისთვის მოგვწერეთ ან ეწვიეთ ჩვენს გვერდებს:</p>
                     <div class="contact-links-list">
+                        <!-- Website -->
+                        <a href="https://qskip.ge" target="_blank" rel="noopener noreferrer" class="contact-link-item">
+                            <svg class="contact-icon-svg globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span>qskip.ge</span>
+                        </a>
+
+                        <!-- Instagram Direct Inline SVG Fix -->
                         <a href="https://www.instagram.com/qskip_/" target="_blank" rel="noopener noreferrer" class="contact-link-item">
-                            <i data-lucide="instagram" class="contact-icon instagram"></i>
+                            <svg class="contact-icon-svg instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                             <span>@qskip_</span>
                         </a>
+
+                        <!-- Direct Mailto Link -->
                         <a href="mailto:contact@qskip.ge" class="contact-link-item">
-                            <i data-lucide="mail" class="contact-icon mail"></i>
+                            <svg class="contact-icon-svg mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                             <span>contact@qskip.ge</span>
                         </a>
                     </div>
@@ -368,9 +398,5 @@
         </div>
     </footer>
 
-    <!-- Initialize Lucide Icons -->
-    <script>
-        lucide.createIcons();
-    </script>
 </body>
 </html>
