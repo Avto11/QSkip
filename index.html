@@ -1,384 +1,688 @@
 <!DOCTYPE html>
-<html lang="ka">
+<html lang="ka" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QSkip - ციფრული რიგების პლატფორმა</title>
-
-    <!-- Meta Description for Google Search Results -->
-    <meta name="description" content="QSkip არის ციფრული რიგების პლატფორმა, რომელიც საშუალებას აძლევს მომხმარებელს ონლაინ „დადგეს“ ნებისმიერი პარტნიორი ობიექტის რიგში და თავიდან აიცილოს ფიზიკურ სივრცეში ლოდინი.">
-
-    <!-- Favicon Settings for Google Search (Ensure favicon.png is 48x48px) -->
-    <link rel="icon" type="image/png" href="/favicon.png">
+    <title>QSkip - ციფრული რიგების პლატფორმა | Digital Queue Management</title>
+    
+    <!-- FAVICON FIX FOR GOOGLE SEARCH -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
     <link rel="shortcut icon" href="/favicon.png" type="image/png">
-    <link rel="apple-touch-icon" href="/favicon.png">
+    
+    <!-- Meta tags for SEO & Social Sharing -->
+    <meta name="description" content="QSkip - B2B2C ციფრული რიგების მართვის ინოვაციური პლატფორმა. დაზოგე დრო და მართე რიგები დისტანციურად.">
+    <meta property="og:title" content="QSkip - Digital Queue Platform">
+    <meta property="og:description" content="Digitizing physical queues with AI-powered wait times and remote access.">
+    <meta property="og:image" content="/banner.png">
+    <meta property="og:type" content="website">
 
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --primary: #0066cc;
-            --accent: #2ecc71;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Small Top Banner / Logo Styling */
-        .logo-banner-container {
-            background-color: #ffffff;
-            display: inline-block;
-            padding: 8px 24px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .logo-banner-img {
-            height: 90px; /* Compact logo size */
-            width: auto;
-            display: block;
-            object-fit: contain;
-        }
-
-        /* Hero Section */
-        header {
-            text-align: center;
-            padding: 35px 20px 40px 20px;
-            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-            border-bottom: 1px solid #334155;
-            border-radius: 0 0 20px 20px;
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            color: var(--accent);
-            margin-bottom: 12px;
-            font-weight: bold;
-        }
-
-        .meta-info {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .badge {
-            background-color: var(--primary);
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .badge.funding {
-            background-color: #e67e22;
-        }
-
-        /* Main Content Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        @media (max-width: 900px) {
-            .grid {
-                grid-template-columns: 1fr;
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#181C20',
+                            card: '#22272B',
+                            green: '#22C55E',
+                            greenHover: '#16A34A',
+                            blue: '#0066FF',
+                            accent: '#2563EB',
+                        }
+                    }
+                }
             }
         }
+    </script>
 
-        section {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            border: 1px solid #334155;
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js for Interactive Data Visuals -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Noto Sans Georgian', 'Inter', sans-serif;
+            background-color: #0F1215;
+            color: #F3F4F6;
         }
-
-        h2 {
-            font-size: 1.5rem;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            border-left: 4px solid var(--accent);
-            padding-left: 10px;
+        .tab-content {
+            display: none;
         }
-
-        p {
-            color: var(--text-muted);
-            margin-bottom: 15px;
-            text-align: justify;
+        .tab-content.active {
+            display: block;
         }
-
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-
-        li {
-            margin-bottom: 10px;
-            color: var(--text-muted);
-            position: relative;
-            padding-left: 20px;
-        }
-
-        li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        /* Team Cards */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .member-card {
-            background-color: #111827;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #1e293b;
-        }
-
-        .member-name {
-            font-weight: bold;
-            color: var(--text-main);
-            font-size: 1.1rem;
-        }
-
-        .member-role {
-            color: var(--accent);
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-        }
-
-        .member-contact {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            word-break: break-all;
-        }
-
-        /* Sidebar & Contact Link Styling */
-        .sidebar-section {
-            background-color: #111827;
-            border: 1px dashed var(--primary);
-        }
-
-        .contact-links-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .contact-link-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-main);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.2s ease, transform 0.2s ease;
-            word-break: break-all;
-        }
-
-        .contact-link-item:hover {
-            color: var(--accent);
-            transform: translateX(4px);
-        }
-
-        .contact-icon-svg {
-            width: 20px;
-            height: 20px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            flex-shrink: 0;
-        }
-
-        .contact-icon-svg.instagram { color: #e1306c; }
-        .contact-icon-svg.mail { color: var(--accent); }
-
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            border-top: 1px solid #334155;
-            margin-top: 60px;
+        .glass-card {
+            background: rgba(30, 35, 42, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col justify-between antialiased">
 
-    <header>
-        <div class="container">
-            <!-- Small Header Banner / Logo on White Background -->
-            <div class="logo-banner-container">
-                <img src="banner.png" alt="QSkip Logo" class="logo-banner-img">
-            </div>
+    <!-- TOP RIBBON NAVIGATION -->
+    <header class="sticky top-0 z-50 glass-card border-b border-gray-800/80 shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Section -->
+            <a href="#" onclick="switchTab('home')" class="flex items-center gap-3 group">
+                <img src="banner.png" alt="QSkip Logo" class="h-10 w-auto object-contain transition-transform group-hover:scale-105" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50/0F1215/22C55E?text=QSkip';">
+            </a>
 
-            <div class="tagline">ციფრული რიგების პლატფორმა</div>
-            <p style="max-width: 700px; margin: 0 auto; text-align: center;">
-                გუნდი: <strong>ფიზმათGPT</strong>
-            </p>
-            <div class="meta-info">
-                <span class="badge">ინდუსტრია: SaaS / ციფრული ტრანსფორმაცია</span>
-                <span class="badge funding">მოთხოვნილი თანხა: 25,000 ლარი</span>
+            <!-- Navigation Links Ribbon -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-brand-green bg-gray-800/60">
+                    <i class="fa-solid fa-house mr-2"></i><span data-ka="მთავარი" data-en="Home">მთავარი</span>
+                </button>
+                <button onclick="switchTab('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-300 hover:text-white hover:bg-gray-800/40">
+                    <i class="fa-solid fa-circle-info mr-2"></i><span data-ka="შესახებ" data-en="About">შესახებ</span>
+                </button>
+                <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-300 hover:text-white hover:bg-gray-800/40">
+                    <i class="fa-solid fa-envelope mr-2"></i><span data-ka="დაგვიკავშირდით" data-en="Contact Us">დაგვიკავშირდით</span>
+                </button>
+                <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-300 hover:text-white hover:bg-gray-800/40">
+                    <i class="fa-solid fa-circle-question mr-2"></i><span data-ka="ხდკ" data-en="FAQ">ხდკ</span>
+                </button>
+            </nav>
+
+            <!-- Language Switcher & Mobile Menu Trigger -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleLanguage()" id="lang-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-800 hover:bg-gray-700 text-brand-green border border-gray-700 transition flex items-center gap-2">
+                    <i class="fa-solid fa-globe"></i> <span id="lang-label">EN</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white p-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
             </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-gray-800 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 hover:bg-gray-800 flex items-center gap-3">
+                <i class="fa-solid fa-house text-brand-green"></i> <span data-ka="მთავარი" data-en="Home">მთავარი</span>
+            </button>
+            <button onclick="switchTab('about'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 hover:bg-gray-800 flex items-center gap-3">
+                <i class="fa-solid fa-circle-info text-brand-blue"></i> <span data-ka="შესახებ" data-en="About">შესახებ</span>
+            </button>
+            <button onclick="switchTab('contact'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 hover:bg-gray-800 flex items-center gap-3">
+                <i class="fa-solid fa-envelope text-purple-400"></i> <span data-ka="დაგვიკავშირდით" data-en="Contact Us">დაგვიკავშირდით</span>
+            </button>
+            <button onclick="switchTab('faq'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 hover:bg-gray-800 flex items-center gap-3">
+                <i class="fa-solid fa-circle-question text-yellow-400"></i> <span data-ka="ხდკ" data-en="FAQ">ხდკ</span>
+            </button>
         </div>
     </header>
 
-    <div class="container">
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
 
-        <div class="grid">
-            
-            <!-- მარცხენა ძირითადი სვეტი -->
-            <main>
-                <section id="about">
-                    <h2>პროექტის შესახებ</h2>
-                    <p>QSkip არის ციფრული რიგების პლატფორმა, რომელიც საშუალებას აძლევს მომხმარებელს ონლაინ „დადგეს“ ნებისმიერი პარტნიორი ობიექტის რიგში და თავიდან აიცილოს ფიზიკურ სივრცეში ლოდინი. მომხმარებელი ადგილზე მიდის ზუსტად მაშინ, როცა მისი რიგი იქნება, ხოლო ბიზნესები იღებენ ეფექტურ ინსტრუმენტს მომხმარებელთა ნაკადების უკეთ მართვისთვის.</p>
-                </section>
-
-                <section id="problem">
-                    <h2>პრობლემა და აქტუალურობა</h2>
-                    <p>ფიზიკურ რიგებში დგომა მომხმარებლისთვის დროის კარგვასა და სტრესს იწვევს, ხოლო ბიზნესებისთვის ქაოტური ხალხმრავლობა დიდ გამოწვევას წარმოადგენს. ბაზარზე არსებული ფიზიკური აპარატები ძვირია, ლოკალურია და მაინც ადგილზე ყოფნას მოითხოვს.</p>
-                    <p>კვლევების მიხედვით, ადამიანი ცხოვრების განმავლობაში საშუალოდ 6 თვეს რიგებში ატარებს, ხოლო მომხმარებელთა 70%-ზე მეტი უარს ამბობს სერვისზე, თუ გრძელ რიგს ხედავს. ბიზნესები ამის გამო კარგავენ პოტენციურ შემოსავალს.</p>
-                </section>
-
-                <section id="solution">
-                    <h2>პრობლემის გადაჭრა</h2>
-                    <p>QSkip არის ინოვაციური B2B2C პლატფორმა, რომელიც ტრადიციულ რიგებს სრულად აციფრულებს. განსხვავებით ძველი, ფიზიკური აპარატებისგან, QSkip არის მოქნილი SaaS გადაწყვეტა ბიზნესებისთვის, რომელიც მინიმალური დანახარჯით ოპტიმიზაციას უკეთებს მომხმარებელთა ნაკადს, ამცირებს სივრცეში ხალხმრავლობას და ზრდის მომსახურების ეფექტურობას ანალიტიკური ხელსაწყოების დახმარებით.</p>
-                </section>
-
-                <section id="ai-component">
-                    <h2>AI (ხელოვნური ინტელექტი) კომპონენტი</h2>
-                    <p>აპლიკაცია ხელოვნური ინტელექტის დახმარებით ითვლის მომხმარებლის ობიექტზე მისვლის ოპტიმალურ დროს, რა დროსაც ითვალისწინებს გზებზე არსებულ მოძრაობას, ობიექტის მიმდინარე დატვირთვასა და მომსახურების საშუალო სიჩქარეს.</p>
-                    <p>მანქანური სწავლების (Machine Learning) ალგორითმები აანალიზებენ ძველ მონაცემებს, რაც მომხმარებელს ეხმარება წინა დღით ან უფრო ადრე დაჯავშნოს ადგილი რიგში, პიკის საათების გათვალისწინებით. ბიზნესებისთვის კი AI წინასწარ განსაზღვრავს მოთხოვნას პერსონალის რესურსის ეფექტურად განაწილებისთვის.</p>
-                </section>
-
-                <section id="market">
-                    <h2>ბაზრის შესაძლებლობა და მომხმარებლები</h2>
-                    <p>საქართველოში შემომავალი მილიონობით ტურისტი, რომელთათვისაც დრო შეზღუდული რესურსია, ქმნის დიდ, მასშტაბირებად ბაზარს. სერვისი თანაბრად ორიენტირებულია ადგილობრივ მომხმარებლებზეც.</p>
-                    <ul>
-                        <li><strong>B2C:</strong> უცხოელი ტურისტები (ენობრივი ბარიერის გარეშე) და ადგილობრივი მაცხოვრებლები, რომლებიც უფრთხილდებიან დროს.</li>
-                        <li><strong>B2B:</strong> ტურისტულად აქტიურ ზონებში მოქმედი კაფე-რესტორნები, მუზეუმები, კლინიკები და სხვა ობიექტები.</li>
-                    </ul>
-                </section>
-
-                <section id="team">
-                    <h2>ჩვენი გუნდი</h2>
-                    <div class="team-grid">
-                        <div class="member-card">
-                            <div class="member-name">ავთანდილ ნიკოლეიშვილი</div>
-                            <div class="member-role">გუნდის ლიდერი / მთავარი დეველოპერი, პროდუქტის არქიტექტორი</div>
-                            <div class="member-contact">📞 595956795<br>✉️ nikoleishvili.avtandili@gmail.com</div>
-                        </div>
-                        <div class="member-card">
-                            <div class="member-name">ელენე ბერაძე</div>
-                            <div class="member-role">UI/UX და მომხმარებლის გამოცდილების მკვლევარი</div>
-                            <div class="member-contact">📞 592079992<br>✉️ eleneberadze570@gmail.com</div>
-                        </div>
-                        <div class="member-card">
-                            <div class="member-name">მაქსიმე ორმოცაძე</div>
-                            <div class="member-role">ბაზრის კვლევა და მონაცემთა ანალიზი</div>
-                            <div class="member-contact">📞 597800734<br>✉️ maxmax09142011@gmail.com</div>
-                        </div>
-                        <div class="member-card">
-                            <div class="member-name">ნიკოლოზ გველესიანი</div>
-                            <div class="member-role">ბიზნესის განვითარება და პარტნიორების მოძიება</div>
-                            <div class="member-contact">📞 598323044<br>✉️ nikolozgvelesiani910@gmail.com</div>
-                        </div>
-                        <div class="member-card">
-                            <div class="member-name">თეკლა ჩოგოვაძე</div>
-                            <div class="member-role">ბრენდინგისა და კრეატიული მიმართულების ლიდერი</div>
-                            <div class="member-contact">📞 599177442<br>✉️ tekla0401@gmail.com</div>
-                        </div>
-                    </div>
-                </section>
-            </main>
-
-            <!-- მარჯვენა დამხმარე სვეტი -->
-            <aside>
-                <section class="sidebar-section">
-                    <h2>კონტაქტი</h2>
-                    <p>საერთო კითხვებისა და თანამშრომლობისთვის მოგვწერეთ ან ეწვიეთ ჩვენს გვერდებს:</p>
-                    <div class="contact-links-list">
-                        <!-- Instagram Link -->
-                        <a href="https://www.instagram.com/qskip_/" target="_blank" rel="noopener noreferrer" class="contact-link-item">
-                            <svg class="contact-icon-svg instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                            <span>@qskip_</span>
-                        </a>
-
-                        <!-- Direct Mailto Link -->
-                        <a href="mailto:contact@qskip.ge" class="contact-link-item">
-                            <svg class="contact-icon-svg mail" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            <span>contact@qskip.ge</span>
-                        </a>
-                    </div>
-                </section>
-
-                <section class="sidebar-section">
-                    <h2>ბიზნეს მოდელი</h2>
-                    <p><strong>Priority Queues:</strong> ფასიანი პრიორიტეტული რიგები მომენტალური მომსახურებისთვის. შემოსავალი იყოფა ობიექტთან.</p>
-                    <p><strong>SaaS გამოწერა:</strong> პარტნიორი ობიექტების ყოველთვიური ფიქსირებული სააბონენტო ტარიფი (Basic & Pro).</p>
-                    <p><strong>რეკლამა და მარკეტინგი:</strong> პარტნიორების პრიორიტეტული გამოჩენა ძიებასა და რუკაზე.</p>
-                </section>
-
-                <section class="sidebar-section">
-                    <h2>კონკურენტული უპირატესობა</h2>
-                    <p>სისტემა არ მოითხოვს ფიზიკურ აპარატებს ობიექტზე — პროცესი სრულად სმარტფონში ხდება. რიგები ცენტრალიზებულია, რაც ერთ აპლიკაციაში უამრავი სხვადასხვა ობიექტის რიგის მართვის საშუალებას იძლევა.</p>
-                </section>
-
-                <section class="sidebar-section">
-                    <h2>Go-To-Market გეგმა</h2>
-                    <p><strong>B2B:</strong> 10 პოპულარულ კაფესა და მუზეუმთან თანამშრომლობა და მათთვის 3-თვიანი უფასო Beta პერიოდის შეთავაზება.</p>
-                    <p><strong>B2C:</strong> ფიზიკურ სივრცეებში QR კოდების განთავსება და აქტიური სოციალური მედია კამპანია.</p>
-                </section>
+        <!-- ==================== HOME TAB ==================== -->
+        <section id="tab-home" class="tab-content active transition-opacity duration-300">
+            <div class="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8 py-6 md:py-12">
                 
-                <section class="sidebar-section">
-                    <h2>მენტორინგის საჭიროება</h2>
-                    <p>დახმარება AI ტექნიკურ მხარესა და მანქანური სწავლების ალგორითმების გამართვაში. ასევე, ფინანსურ გათვლებსა და პრიორიტეტული ტარიფების სწორად განსაზღვრაში.</p>
-                </section>
-            </aside>
+                <!-- Upfront Logo Banner -->
+                <div class="p-6 md:p-10 rounded-3xl glass-card border border-gray-800 shadow-2xl w-full flex justify-center items-center">
+                    <img src="banner.png" alt="QSkip Full Logo" class="max-h-36 md:max-h-48 w-auto object-contain hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x200/0F1215/22C55E?text=QSkip+Digital+Queues';">
+                </div>
 
-        </div>
-    </div>
+                <!-- Headline & Subtitle -->
+                <div class="space-y-4">
+                    <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-brand-green/10 text-brand-green border border-brand-green/30">
+                        <i class="fa-solid fa-bolt mr-1.5"></i> SaaS & AI Digital Queuing
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight"
+                        data-ka="მართე რიგი ციფრულად, დაზოგე დრო"
+                        data-en="Manage Queues Digitally, Save Time">
+                        მართე რიგი ციფრულად, დაზოგე დრო
+                    </h1>
+                    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto font-normal leading-relaxed"
+                       data-ka="QSkip არის B2B2C ინოვაციური პლატფორმა, რომელიც ტრადიციულ ფიზიკურ რიგებს აციფრულებს. დადექი რიგში დისტანციურად და მიდი ადგილზე ზუსტად შენს ჯერზე."
+                       data-en="QSkip is an innovative B2B2C platform digitizing traditional physical queues. Join lines remotely and arrive exactly when it's your turn.">
+                        QSkip არის B2B2C ინოვაციური პლატფორმა, რომელიც ტრადიციულ ფიზიკურ რიგებს აციფრულებს. დადექი რიგში დისტანციურად და მიდი ადგილზე ზუსტად შენს ჯერზე.
+                    </p>
+                </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 QSkip. ყველა უფლება დაცულია. შექმნილია ფიზმათGPT-ის მიერ.</p>
+                <!-- CTA Redirect Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto pt-4">
+                    <a href="https://qskip.ge/comingsoon" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-brand-green hover:bg-brand-greenHover text-gray-950 font-bold text-base transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-brand-green/20 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-download text-lg"></i>
+                        <span data-ka="ჩამოტვირთე Android APK" data-en="Download Android APK">ჩამოტვირთე Android APK</span>
+                    </a>
+                    
+                    <a href="https://qskip.ge/comingsoon" class="w-full sm:w-auto px-8 py-4 rounded-2xl glass-card hover:bg-gray-800 text-white font-bold text-base border border-gray-700 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-rocket text-brand-blue text-lg"></i>
+                        <span data-ka="გახსენი Web App (Lovable)" data-en="Launch Web App (Lovable)">გახსენი Web App (Lovable)</span>
+                    </a>
+                </div>
+
+                <!-- Feature Badges Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full pt-12">
+                    <div class="p-6 rounded-2xl glass-card text-left space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-brand-green/10 text-brand-green flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-mobile-screen-button"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white" data-ka="დისტანციური რიგი" data-en="Remote Queuing">დისტანციური რიგი</h3>
+                        <p class="text-sm text-gray-400" data-ka="არანაირი ფიზიკური აპარატი — ჩაეწერე პირდაპირ სმარტფონით." data-en="No hardware ticket machine needed — join lines directly from your phone.">არანაირი ფიზიკური აპარატი — ჩაეწერე პირდაპირ სმარტფონით.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-card text-left space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-brand-blue flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white" data-ka="AI ETA გამოთვლა" data-en="AI ETA Analytics">AI ETA გამოთვლა</h3>
+                        <p class="text-sm text-gray-400" data-ka="ხელოვნური ინტელექტი ითვლის მოსვლის ზუსტ დროს საცობებისა და ნაკადის მიხედვით." data-en="AI calculates exact arrival time based on traffic and service capacity.">ხელოვნური ინტელექტი ითვლის მოსვლის ზუსტ დროს საცობებისა და ნაკადის მიხედვით.</p>
+                    </div>
+
+                    <div class="p-6 rounded-2xl glass-card text-left space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-xl font-bold">
+                            <i class="fa-solid fa-crown"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white" data-ka="პრიორიტეტული რიგი" data-en="Priority Access">პრიორიტეტული რიგი</h3>
+                        <p class="text-sm text-gray-400" data-ka="ტურისტებისა და დატვირთული ხალხისთვის სწრაფი მომსახურების შესაძლებლობა." data-en="Fast-track service option designed for tourists and busy commuters.">ტურისტებისა და დატვირთული ხალხისთვის სწრაფი მომსახურების შესაძლებლობა.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== ABOUT TAB ==================== -->
+        <section id="tab-about" class="tab-content transition-opacity duration-300">
+            <div class="space-y-12 max-w-5xl mx-auto">
+                
+                <!-- Title Header -->
+                <div class="border-b border-gray-800 pb-6">
+                    <span class="text-brand-green font-bold text-sm uppercase tracking-wider" data-ka="სტარტაპის შესახებ" data-en="About The Startup">სტარტაპის შესახებ</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1" data-ka="QSkip — პროექტისა და გუნდის მიმოხილვა" data-en="QSkip — Project & Team Overview">QSkip — პროექტისა და გუნდის მიმოხილვა</h2>
+                    <p class="text-gray-400 mt-2 text-base" data-ka="ინდუსტრია: ტექნოლოგიები (SaaS) / ციფრული ტრანსფორმაცია | მოთხოვნილი თანხა: 25,000 ₾" data-en="Industry: Tech (SaaS) / Digital Transformation | Requested Funding: 25,000 GEL">
+                        ინდუსტრია: ტექნოლოგიები (SaaS) / ციფრული ტრანსფორმაცია | მოთხოვნილი თანხა: 25,000 ₾
+                    </p>
+                </div>
+
+                <!-- Problem & Solution Visual Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Problem Card -->
+                    <div class="p-8 rounded-3xl glass-card border-l-4 border-l-red-500 space-y-4">
+                        <div class="flex items-center gap-3 text-red-400 font-bold text-xl">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <h3 data-ka="პრობლემა" data-en="The Problem">პრობლემა</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed" data-ka="ფიზიკურ რიგებში დგომა იწვევს დროის კარგვასა და სტრესს. კვლევების მიხედვით, ადამიანი ცხოვრების განმავლობაში საშუალოდ 6 თვეს რიგებში ატარებს, ხოლო მომხმარებელთა 86% ერიდება სერვისს, სადაც გრძელ რიგს ხედავს. ტრადიციული ფიზიკური აპარატები ძვირია და მხოლოდ ადგილზე მყოფთათვის მუშაობს." data-en="Physical queues cause stress and wasted time. Research shows people spend 6 months of their lives waiting in lines, and 86% avoid businesses with visible long lines. Traditional ticket machines are expensive and hardware-bound.">
+                            ფიზიკურ რიგებში დგომა იწვევს დროის კარგვასა და სტრესს. კვლევების მიხედვით, ადამიანი ცხოვრების განმავლობაში საშუალოდ 6 თვეს რიგებში ატარებს, ხოლო მომხმარებელთა 86% ერიდება სერვისს, სადაც გრძელ რიგს ხედავს. ტრადიციული ფიზიკური აპარატები ძვირია და მხოლოდ ადგილზე მყოფთათვის მუშაობს.
+                        </p>
+                        <div class="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-300 font-semibold flex items-center justify-between">
+                            <span data-ka="მომხმარებელთა უარი გრძელ რიგებზე:" data-en="Users avoiding long queues:">მომხმარებელთა უარი გრძელ რიგებზე:</span>
+                            <span class="text-lg font-bold">86%</span>
+                        </div>
+                    </div>
+
+                    <!-- Solution Card -->
+                    <div class="p-8 rounded-3xl glass-card border-l-4 border-l-brand-green space-y-4">
+                        <div class="flex items-center gap-3 text-brand-green font-bold text-xl">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <h3 data-ka="გადაჭრა" data-en="The Solution">გადაჭრა</h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed" data-ka="QSkip არის B2B2C SaaS პლატფორმა, რომელიც ტრადიციულ რიგებს აციფრულებს. მომხმარებელს შეუძლია დისტანციურად ჩაეწეროს პარტნიორი ობიექტის რიგში, ადევნოს თვალი პროგრესს რეალურ დროში და მივიდეს ადგილზე ზუსტად თავის ჯერზე. არ მოითხოვს ფიზიკურ აპარატებს — პროცესი სრულად სმარტფონში ხდება." data-en="QSkip is a B2B2C SaaS platform digitizing queues. Users join lines remotely, track progress in real-time, and arrive just in time. No physical hardware required — everything runs seamlessly on smartphones.">
+                            QSkip არის B2B2C SaaS პლატფორმა, რომელიც ტრადიციულ რიგებს აციფრულებს. მომხმარებელს შეუძლია დისტანციურად ჩაეწეროს პარტნიორი ობიექტის რიგში, ადევნოს თვალი პროგრესს რეალურ დროში და მივიდეს ადგილზე ზუსტად თავის ჯერზე. არ მოითხოვს ფიზიკურ აპარატებს — პროცესი სრულად სმარტფონში ხდება.
+                        </p>
+                        <div class="p-4 rounded-xl bg-brand-green/10 border border-brand-green/20 text-xs text-brand-green font-semibold flex items-center justify-between">
+                            <span data-ka="სივრცეში დაზოგილი დრო:" data-en="Time saved in line:">სივრცეში დაზოგილი დრო:</span>
+                            <span class="text-lg font-bold">100% Remote</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Data Charts Section -->
+                <div class="p-8 rounded-3xl glass-card space-y-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-chart-pie text-brand-green"></i>
+                        <span data-ka="მონეტიზაციის მოდელი & AI არქიტექტურა" data-en="Monetization Model & AI Architecture">მონეტიზაციის მოდელი & AI არქიტექტურა</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <!-- Chart container -->
+                        <div class="relative h-64 w-full flex justify-center items-center">
+                            <canvas id="monetizationChart"></canvas>
+                        </div>
+
+                        <!-- Content Details -->
+                        <div class="space-y-4 text-sm text-gray-300">
+                            <div class="p-4 rounded-xl bg-gray-800/60 border border-gray-700/50">
+                                <h4 class="font-bold text-white mb-1" data-ka="🤖 AI ETA & წინასწარი ჯავშანი" data-en="🤖 AI ETA & Pre-booking">🤖 AI ETA & წინასწარი ჯავშანი</h4>
+                                <p data-ka="ხელოვნური ინტელექტი ითვალისწინებს საგზაო მოძრაობას, ობიექტის დატვირთვასა და მომსახურების საშუალო სიჩქარეს. Machine Learning ალგორითმები ეხმარება ბიზნესებს პერსონალის სწორად გადანაწილებაში."
+                                   data-en="AI accounts for road traffic, venue capacity, and service speed. ML algorithms help venues allocate staff resource efficiently.">
+                                    ხელოვნური ინტელექტი ითვალისწინებს საგზაო მოძრაობას, ობიექტის დატვირთვასა და მომსახურების საშუალო სიჩქარეს. Machine Learning ალგორითმები ეხმარება ბიზნესებს პერსონალის სწორად გადანაწილებაში.
+                                </p>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-gray-800/60 border border-gray-700/50">
+                                <h4 class="font-bold text-white mb-1" data-ka="💎 Priority Queues (პრიორიტეტული რიგები)" data-en="💎 Priority Queues">💎 Priority Queues (პრიორიტეტული რიგები)</h4>
+                                <p data-ka="ფასიანი სწრაფი რიგი ტურისტებისა და დატვირთული მომხმარებლებისთვის. ამ სერვისიდან მიღებული მოგება თანაბრად იყოფა პარტნიორ ობიექტთან."
+                                   data-en="Paid fast-track queue ideal for tourists and busy individuals. Revenue generated is shared directly with partner venues.">
+                                    ფასიანი სწრაფი რიგი ტურისტებისა და დატვირთული მომხმარებლებისთვის. ამ სერვისიდან მიღებული მოგება თანაბრად იყოფა პარტნიორ ობიექტთან.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Go To Market Strategy & B2B / B2C Targets -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="p-8 rounded-3xl glass-card space-y-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-bullseye text-brand-blue"></i>
+                            <span data-ka="სამიზნე აუდიტორია" data-en="Target Audience">სამიზნე აუდიტორია</span>
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-users text-brand-green mt-1"></i>
+                                <span><strong>B2C:</strong> <span data-ka="უცხოელი ტურისტები (რომელთაც დრო შეზღუდული აქვთ) და ადგილობრივი მაცხოვრებლები." data-en="Foreign tourists (limited time in country) & local residents.">უცხოელი ტურისტები (რომელთაც დრო შეზღუდული აქვთ) და ადგილობრივი მაცხოვრებლები.</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-store text-brand-blue mt-1"></i>
+                                <span><strong>B2B:</strong> <span data-ka="კაფე-რესტორნები, მუზეუმები, კლინიკები და ტურისტულ ზონებში მოქმედი ობიექტები." data-en="Cafes, restaurants, museums, clinics, and businesses in high-footfall areas.">კაფე-რესტორნები, მუზეუმები, კლინიკები და ტურისტულ ზონებში მოქმედი ობიექტები.</span></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="p-8 rounded-3xl glass-card space-y-4">
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-rocket text-yellow-400"></i>
+                            <span data-ka="Go-to-Market სტრატეგია" data-en="Go-To-Market Strategy">Go-to-Market სტრატეგია</span>
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-check-double text-yellow-400 mt-1"></i>
+                                <span><strong>B2B Beta:</strong> <span data-ka="10 პოპულარული კაფე და მუზეუმი ტურისტულ ზონებში — 3-თვიანი უფასო სატესტო პერიოდი." data-en="10 popular cafes/museums in tourist zones — 3-month free beta testing.">10 პოპულარული კაფე და მუზეუმი ტურისტულ ზონებში — 3-თვიანი უფასო სატესტო პერიოდი.</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-qrcode text-brand-green mt-1"></i>
+                                <span><strong>B2C QR Codes:</strong> <span data-ka="მაგიდებსა და ფიზიკურ სადგომებთან განთავსებული QR კოდები აპლიკაციის სწრაფი ჩამოტვირთვისთვის." data-en="QR codes on venue tables and entry stands for instant app download.">მაგიდებსა და ფიზიკურ სადგომებთან განთავსებული QR კოდები აპლიკაციის სწრაფი ჩამოტვირთვისთვის.</span></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Team Section -->
+                <div class="space-y-6">
+                    <div class="text-center space-y-2">
+                        <span class="text-brand-green font-bold text-xs uppercase tracking-widest" data-ka="გუნდი" data-en="The Team">გუნდი</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white" data-ka="გუნდი: ფიზმათGPT" data-en="Team: PhyzMathGPT">გუნდი: ფიზმათGPT</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Member 1 -->
+                        <div class="p-6 rounded-2xl glass-card border border-gray-800 space-y-3 hover:border-brand-green/50 transition duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-brand-green/20 text-brand-green flex items-center justify-center font-bold text-lg">
+                                AN
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">ავთანდილ ნიკოლეიშვილი</h4>
+                                <p class="text-xs text-brand-green font-semibold" data-ka="გუნდის ლიდერი, მთავარი დეველოპერი" data-en="Team Leader, Lead Developer">გუნდის ლიდერი, მთავარი დეველოპერი</p>
+                            </div>
+                            <p class="text-xs text-gray-400" data-ka="პროდუქტის არქიტექტორი და ტექნიკური სისტემის ავტორი." data-en="Product Architect and Lead Technical Engineer.">პროდუქტის არქიტექტორი და ტექნიკური სისტემის ავტორი.</p>
+                        </div>
+
+                        <!-- Member 2 -->
+                        <div class="p-6 rounded-2xl glass-card border border-gray-800 space-y-3 hover:border-brand-blue/50 transition duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-brand-blue/20 text-brand-blue flex items-center justify-center font-bold text-lg">
+                                EB
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">ელენე ბერაძე</h4>
+                                <p class="text-xs text-brand-blue font-semibold" data-ka="UI/UX & UX Researcher" data-en="UI/UX & UX Researcher">UI/UX & UX Researcher</p>
+                            </div>
+                            <p class="text-xs text-gray-400" data-ka="მომხმარებლის გამოცდილების და ინტერფეისის მკვლევარი." data-en="User Experience and Interface Design Research.">მომხმარებლის გამოცდილების და ინტერფეისის მკვლევარი.</p>
+                        </div>
+
+                        <!-- Member 3 -->
+                        <div class="p-6 rounded-2xl glass-card border border-gray-800 space-y-3 hover:border-purple-500/50 transition duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-lg">
+                                MO
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">მაქსიმე ორმოცაძე</h4>
+                                <p class="text-xs text-purple-400 font-semibold" data-ka="ბაზრის კვლევა & Data Analysis" data-en="Market Research & Data Analysis">ბაზრის კვლევა & Data Analysis</p>
+                            </div>
+                            <p class="text-xs text-gray-400" data-ka="ბაზრის ტენდენციებისა და მონაცემთა ანალიტიკის ხელმძღვანელი." data-en="Market trends analyst and data optimization lead.">ბაზრის ტენდენციებისა და მონაცემთა ანალიტიკის ხელმძღვანელი.</p>
+                        </div>
+
+                        <!-- Member 4 -->
+                        <div class="p-6 rounded-2xl glass-card border border-gray-800 space-y-3 hover:border-yellow-500/50 transition duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold text-lg">
+                                NG
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">ნიკოლოზ გველესიანი</h4>
+                                <p class="text-xs text-yellow-400 font-semibold" data-ka="ბიზნესის განვითარება" data-en="Business Development">ბიზნესის განვითარება</p>
+                            </div>
+                            <p class="text-xs text-gray-400" data-ka="პარტნიორი ობიექტების მოძიება და B2B კომუნიკაცია." data-en="B2B partner outreach and business growth strategies.">პარტნიორი ობიექტების მოძიება და B2B კომუნიკაცია.</p>
+                        </div>
+
+                        <!-- Member 5 -->
+                        <div class="p-6 rounded-2xl glass-card border border-gray-800 space-y-3 hover:border-pink-500/50 transition duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center font-bold text-lg">
+                                TC
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-bold text-white">თეკლა ჩოგოვაძე</h4>
+                                <p class="text-xs text-pink-400 font-semibold" data-ka="ბრენდინგი & Creative Lead" data-en="Branding & Creative Lead">ბრენდინგი & Creative Lead</p>
+                            </div>
+                            <p class="text-xs text-gray-400" data-ka="ვიზუალური იდენტობა, კრეატიული მიმართულება და მარკეტინგი." data-en="Visual brand identity and creative direction lead.">ვიზუალური იდენტობა, კრეატიული მიმართულება და მარკეტინგი.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== CONTACT US TAB ==================== -->
+        <section id="tab-contact" class="tab-content transition-opacity duration-300">
+            <div class="max-w-4xl mx-auto space-y-10">
+                
+                <!-- Section Header -->
+                <div class="text-center space-y-3">
+                    <span class="text-brand-green font-bold text-xs uppercase tracking-widest" data-ka="კონტაქტი" data-en="Contact Us">კონტაქტი</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white" data-ka="დაგვიკავშირდით QSkip გუნდს" data-en="Get in Touch with QSkip Team">დაგვიკავშირდით QSkip გუნდს</h2>
+                    <p class="text-gray-400 text-sm max-w-lg mx-auto" data-ka="გაქვთ შეკითხვები ან გსურთ პარტნიორობა? მოგვწერეთ ნებისმიერ დროს." data-en="Have questions or interested in partnership? Reach out to us anytime.">
+                        გაქვთ შეკითხვები ან გსურთ პარტნიორობა? მოგვწერეთ ნებისმიერ დროს.
+                    </p>
+                </div>
+
+                <!-- Main Official Contacts -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <a href="mailto:contact@qskip.ge" class="p-6 rounded-2xl glass-card border border-gray-800 hover:border-brand-green flex items-center gap-4 group transition">
+                        <div class="w-14 h-14 rounded-2xl bg-brand-green/10 text-brand-green flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400 block font-medium" data-ka="ოფიციალური ელ-ფოსტა" data-en="Official Email">ოფიციალური ელ-ფოსტა</span>
+                            <span class="text-lg font-bold text-white group-hover:text-brand-green transition">contact@qskip.ge</span>
+                        </div>
+                    </a>
+
+                    <a href="https://instagram.com/qskip.app" target="_blank" class="p-6 rounded-2xl glass-card border border-gray-800 hover:border-pink-500 flex items-center gap-4 group transition">
+                        <div class="w-14 h-14 rounded-2xl bg-pink-500/10 text-pink-500 flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                            <i class="fa-brands fa-instagram"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs text-gray-400 block font-medium" data-ka="ინსტაგრამის გვერდი" data-en="Instagram Page">ინსტაგრამის გვერდი</span>
+                            <span class="text-lg font-bold text-white group-hover:text-pink-400 transition">@qskip.app</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Individual Team Contact Info Table/List -->
+                <div class="p-8 rounded-3xl glass-card space-y-6">
+                    <h3 class="text-xl font-bold text-white flex items-center gap-3">
+                        <i class="fa-solid fa-address-book text-brand-blue"></i>
+                        <span data-ka="გუნდის წევრების საკონტაქტო ინფორმაცია" data-en="Individual Team Member Contacts">გუნდის წევრების საკონტაქტო ინფორმაცია</span>
+                    </h3>
+
+                    <div class="divide-y divide-gray-800/80">
+                        <!-- Member 1 -->
+                        <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <h4 class="font-bold text-white text-base">ავთანდილ ნიკოლეიშვილი</h4>
+                                <span class="text-xs text-brand-green" data-ka="მთავარი დეველოპერი, პროდუქტის არქიტექტორი" data-en="Lead Developer, Product Architect">მთავარი დეველოპერი, პროდუქტის არქიტექტორი</span>
+                            </div>
+                            <div class="flex flex-col sm:items-end text-xs text-gray-300 gap-1">
+                                <a href="tel:595956795" class="hover:text-brand-green transition"><i class="fa-solid fa-phone mr-1.5 text-gray-500"></i>595 95 67 95</a>
+                                <a href="mailto:nikoleishvili.avtandili@gmail.com" class="hover:text-brand-green transition"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i>nikoleishvili.avtandili@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Member 2 -->
+                        <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <h4 class="font-bold text-white text-base">ელენე ბერაძე</h4>
+                                <span class="text-xs text-brand-blue" data-ka="UI/UX და მომხმარებლის გამოცდილების მკვლევარი" data-en="UI/UX & User Experience Researcher">UI/UX და მომხმარებლის გამოცდილების მკვლევარი</span>
+                            </div>
+                            <div class="flex flex-col sm:items-end text-xs text-gray-300 gap-1">
+                                <a href="tel:592079992" class="hover:text-brand-blue transition"><i class="fa-solid fa-phone mr-1.5 text-gray-500"></i>592 07 99 92</a>
+                                <a href="mailto:eleneberadze570@gmail.com" class="hover:text-brand-blue transition"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i>eleneberadze570@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Member 3 -->
+                        <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <h4 class="font-bold text-white text-base">მაქსიმე ორმოცაძე</h4>
+                                <span class="text-xs text-purple-400" data-ka="ბაზრის კვლევა და მონაცემთა ანალიზი" data-en="Market Research & Data Analysis">ბაზრის კვლევა და მონაცემთა ანალიზი</span>
+                            </div>
+                            <div class="flex flex-col sm:items-end text-xs text-gray-300 gap-1">
+                                <a href="tel:597800734" class="hover:text-purple-400 transition"><i class="fa-solid fa-phone mr-1.5 text-gray-500"></i>597 80 07 34</a>
+                                <a href="mailto:maxmax09142011@gmail.com" class="hover:text-purple-400 transition"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i>maxmax09142011@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Member 4 -->
+                        <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <h4 class="font-bold text-white text-base">ნიკოლოზ გველესიანი</h4>
+                                <span class="text-xs text-yellow-400" data-ka="ბიზნესის განვითარება და პარტნიორების მოძიება" data-en="Business Development & Partner Outreach">ბიზნესის განვითარება და პარტნიორების მოძიება</span>
+                            </div>
+                            <div class="flex flex-col sm:items-end text-xs text-gray-300 gap-1">
+                                <a href="tel:598323044" class="hover:text-yellow-400 transition"><i class="fa-solid fa-phone mr-1.5 text-gray-500"></i>598 32 30 44</a>
+                                <a href="mailto:nikolozgvelesiani910@gmail.com" class="hover:text-yellow-400 transition"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i>nikolozgvelesiani910@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <!-- Member 5 -->
+                        <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                            <div>
+                                <h4 class="font-bold text-white text-base">თეკლა ჩოგოვაძე</h4>
+                                <span class="text-xs text-pink-400" data-ka="ბრენდინგისა და კრეატიული მიმართულების ლიდერი" data-en="Branding & Creative Direction Lead">ბრენდინგისა და კრეატიული მიმართულების ლიდერი</span>
+                            </div>
+                            <div class="flex flex-col sm:items-end text-xs text-gray-300 gap-1">
+                                <a href="tel:599177442" class="hover:text-pink-400 transition"><i class="fa-solid fa-phone mr-1.5 text-gray-500"></i>599 17 74 42</a>
+                                <a href="mailto:tekla0401@gmail.com" class="hover:text-pink-400 transition"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i>tekla0401@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==================== FAQ TAB ==================== -->
+        <section id="tab-faq" class="tab-content transition-opacity duration-300">
+            <div class="max-w-3xl mx-auto space-y-8">
+                
+                <div class="text-center space-y-3">
+                    <span class="text-brand-green font-bold text-xs uppercase tracking-widest" data-ka="ხშირად დასმული შეკითხვები" data-en="Frequently Asked Questions">ხშირად დასმული შეკითხვები</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white" data-ka="ხდკ / FAQ" data-en="FAQ / Knowledge Base">ხდკ / FAQ</h2>
+                    <p class="text-gray-400 text-sm" data-ka="გაიგეთ მეტი QSkip-ის მუშაობის პრინციპისა და ფუნქციების შესახებ." data-en="Learn more about QSkip architecture and features.">
+                        გაიგეთ მეტი QSkip-ის მუშაობის პრინციპისა და ფუნქციების შესახებ.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Q1 -->
+                    <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
+                        <button onclick="toggleFaq(1)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:bg-gray-800/50 transition">
+                            <span data-ka="1. რა არის QSkip და როგორ მუშაობს ის?" data-en="1. What is QSkip and how does it work?">1. რა არის QSkip და როგორ მუშაობს ის?</span>
+                            <i id="faq-icon-1" class="fa-solid fa-chevron-down text-brand-green transition-transform duration-200"></i>
+                        </button>
+                        <div id="faq-ans-1" class="hidden p-5 pt-0 text-sm text-gray-300 border-t border-gray-800/50 leading-relaxed"
+                             data-ka="QSkip არის B2B2C ციფრული რიგების პლატფორმა. მომხმარებელს შეუძლია აპლიკაციიდან დისტანციურად დადგეს ნებისმიერი პარტნიორი ობიექტის (კაფე, მუზეუმი, კლინიკა) რიგში, ადევნოს თვალი პროგრესს რეალურ დროში და მივიდეს ადგილზე ზუსტად თავის ჯერზე."
+                             data-en="QSkip is a B2B2C digital queue platform allowing users to join lines at partner venues remotely via app, monitor progress in real-time, and arrive right on time.">
+                            QSkip არის B2B2C ციფრული რიგების პლატფორმა. მომხმარებელს შეუძლია აპლიკაციიდან დისტანციურად დადგეს ნებისმიერი პარტნიორი ობიექტის (კაფე, მუზეუმი, კლინიკა) რიგში, ადევნოს თვალი პროგრესს რეალურ დროში და მივიდეს ადგილზე ზუსტად თავის ჯერზე.
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
+                        <button onclick="toggleFaq(2)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:bg-gray-800/50 transition">
+                            <span data-ka="2. როგორ ითვლის ხელოვნური ინტელექტი (AI) რიგში დგომის დროს?" data-en="2. How does the AI calculate queue wait times?">2. როგორ ითვლის ხელოვნური ინტელექტი (AI) რიგში დგომის დროს?</span>
+                            <i id="faq-icon-2" class="fa-solid fa-chevron-down text-brand-green transition-transform duration-200"></i>
+                        </button>
+                        <div id="faq-ans-2" class="hidden p-5 pt-0 text-sm text-gray-300 border-t border-gray-800/50 leading-relaxed"
+                             data-ka="AI ალგორითმი აანალიზებს გზებზე არსებულ მოძრაობას (ტრაფიკს), ობიექტის მიმდინარე დატვირთვასა და მომსახურების საშუალო სიჩქარეს. Machine Learning ეხმარება მომხმარებელს ზუსტი ETA-ს მიღებაში და ადგილზე დროულად გამოცხადებაში."
+                             data-en="The AI algorithm analyzes road traffic, live venue capacity, and historical service speeds to deliver exact ETA dynamic calculations.">
+                            AI ალგორითმი აანალიზებს გზებზე არსებულ მოძრაობას (ტრაფიკს), ობიექტის მიმდინარე დატვირთვასა და მომსახურების საშუალო სიჩქარეს. Machine Learning ეხმარება მომხმარებელს ზუსტი ETA-ს მიღებაში და ადგილზე დროულად გამოცხადებაში.
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
+                        <button onclick="toggleFaq(3)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:bg-gray-800/50 transition">
+                            <span data-ka="3. რა არის პრიორიტეტული რიგი (Priority Queue)?" data-en="3. What is a Priority Queue?">3. რა არის პრიორიტეტული რიგი (Priority Queue)?</span>
+                            <i id="faq-icon-3" class="fa-solid fa-chevron-down text-brand-green transition-transform duration-200"></i>
+                        </button>
+                        <div id="faq-ans-3" class="hidden p-5 pt-0 text-sm text-gray-300 border-t border-gray-800/50 leading-relaxed"
+                             data-ka="ეს არის ფასიანი დაჩქარებული სერვისი, განსაკუთრებით მოსახერხებელი ტურისტებისთვის, რომელთაც შეზღუდული დრო აქვთ. მიღებული შემოსავალი ნაწილდება QSkip-სა და პარტნიორ ობიექტს შორის."
+                             data-en="It is a paid fast-track option ideal for time-constrained tourists and users. Generated revenue is shared between QSkip and the venue.">
+                            ეს არის ფასიანი დაჩქარებული სერვისი, განსაკუთრებით მოსახერხებელი ტურისტებისთვის, რომელთაც შეზღუდული დრო აქვთ. მიღებული შემოსავალი ნაწილდება QSkip-სა და პარტნიორ ობიექტს შორის.
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
+                        <button onclick="toggleFaq(4)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:bg-gray-800/50 transition">
+                            <span data-ka="4. სჭირდება თუ არა ბიზნესს ძვირადღირებული ფიზიკური აპარატები?" data-en="4. Do businesses need expensive hardware ticket machines?">4. სჭირდება თუ არა ბიზნესს ძვირადღირებული ფიზიკური აპარატები?</span>
+                            <i id="faq-icon-4" class="fa-solid fa-chevron-down text-brand-green transition-transform duration-200"></i>
+                        </button>
+                        <div id="faq-ans-4" class="hidden p-5 pt-0 text-sm text-gray-300 border-t border-gray-800/50 leading-relaxed"
+                             data-ka="არა! QSkip არის სრულიად Cloud-ზე დაფუძნებული SaaS პლატფორმა. ბიზნესს სჭირდება მხოლოდ მართვის პანელი (პლანშეტი ან სმარტფონი), რაც მინიმუმამდე ამცირებს ხარჯებს."
+                             data-en="No! QSkip is a 100% cloud-based SaaS platform requiring zero dedicated ticket printing hardware. Venues manage everything from a simple dashboard.">
+                            არა! QSkip არის სრულიად Cloud-ზე დაფუძნებული SaaS პლატფორმა. ბიზნესს სჭირდება მხოლოდ მართვის პანელი (პლანშეტი ან სმარტფონი), რაც მინიმუმამდე ამცირებს ხარჯებს.
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
+                        <button onclick="toggleFaq(5)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:bg-gray-800/50 transition">
+                            <span data-ka="5. უფასოა თუ არა QSkip მომხმარებლებისთვის?" data-en="5. Is QSkip free for standard users?">5. უფასოა თუ არა QSkip მომხმარებლებისთვის?</span>
+                            <i id="faq-icon-5" class="fa-solid fa-chevron-down text-brand-green transition-transform duration-200"></i>
+                        </button>
+                        <div id="faq-ans-5" class="hidden p-5 pt-0 text-sm text-gray-300 border-t border-gray-800/50 leading-relaxed"
+                             data-ka="დიახ, სტანდარტულ რიგში დისტანციურად ჩაწერა მომხმარებლებისთვის სრულიად უფასოა. მხოლოდ პრიორიტეტული (დაჩქარებული) რიგით სარგებლობისას მოქმედებს მცირე საფასური."
+                             data-en="Yes, joining standard digital queues remotely is completely free for users. Only optional Priority Queue passes incur a small fee.">
+                            დიახ, სტანდარტულ რიგში დისტანციურად ჩაწერა მომხმარებლებისთვის სრულიად უფასოა. მხოლოდ პრიორიტეტული (დაჩქარებული) რიგით სარგებლობისას მოქმედებს მცირე საფასური.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER SECTION -->
+    <footer class="border-t border-gray-800/80 glass-card mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
+            <div class="flex justify-center items-center gap-6 text-gray-400">
+                <a href="https://instagram.com/qskip.app" target="_blank" class="hover:text-pink-400 transition text-lg"><i class="fa-brands fa-instagram"></i></a>
+                <a href="mailto:contact@qskip.ge" class="hover:text-brand-green transition text-lg"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+            <p class="text-xs text-gray-500 font-medium">
+                © 2026 QSkip. All rights reserved. Built by Team PhyzMathGPT. Domain verified: <span class="text-gray-400 font-bold">qskip.ge</span>
+            </p>
         </div>
     </footer>
 
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        let currentLang = 'ka';
+
+        // Tab Switching Function
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-brand-green', 'bg-gray-800/60');
+                btn.classList.add('text-gray-300');
+            });
+
+            const targetTab = document.getElementById('tab-' + tabId);
+            const targetNav = document.getElementById('nav-' + tabId);
+
+            if (targetTab) targetTab.classList.add('active');
+            if (targetNav) {
+                targetNav.classList.remove('text-gray-300');
+                targetNav.classList.add('text-brand-green', 'bg-gray-800/60');
+            }
+
+            // Scroll smoothly to top on tab change
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Language Switcher Function
+        function toggleLanguage() {
+            currentLang = currentLang === 'ka' ? 'en' : 'ka';
+            document.getElementById('lang-label').innerText = currentLang === 'ka' ? 'EN' : 'GE';
+
+            document.querySelectorAll('[data-ka]').forEach(element => {
+                const text = element.getAttribute(`data-${currentLang}`);
+                if (text) {
+                    element.innerHTML = text;
+                }
+            });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // FAQ Accordion Toggle
+        function toggleFaq(id) {
+            const ans = document.getElementById('faq-ans-' + id);
+            const icon = document.getElementById('faq-icon-' + id);
+
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            } else {
+                ans.classList.add('hidden');
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // Render Chart.js Monetization Graph
+        window.addEventListener('DOMContentLoaded', () => {
+            const ctx = document.getElementById('monetizationChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['B2B SaaS Subscription', 'Priority Queues Split', 'Sponsored Map Placement'],
+                        datasets: [{
+                            data: [45, 35, 20],
+                            backgroundColor: ['#22C55E', '#0066FF', '#EAB308'],
+                            borderWidth: 0
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#9CA3AF',
+                                    font: { family: 'Inter', size: 11 }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
