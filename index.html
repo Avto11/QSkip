@@ -28,12 +28,14 @@
                 extend: {
                     colors: {
                         brand: {
-                            dark: '#181C20',
-                            card: '#22272B',
-                            green: '#22C55E',
-                            greenHover: '#16A34A',
-                            blue: '#0066FF',
-                            accent: '#2563EB',
+                            lightBg: '#F8FAFC',
+                            card: '#FFFFFF',
+                            green: '#16A34A',
+                            greenHover: '#15803D',
+                            blue: '#2563EB',
+                            accent: '#3B82F6',
+                            textPrimary: '#0F172A',
+                            textSecondary: '#475569'
                         }
                     }
                 }
@@ -51,8 +53,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
         body {
             font-family: 'Noto Sans Georgian', 'Inter', sans-serif;
-            background-color: #0F1215;
-            color: #F3F4F6;
+            background-color: #F8FAFC;
+            color: #0F172A;
         }
         .tab-content {
             display: none;
@@ -60,66 +62,66 @@
         .tab-content.active {
             display: block;
         }
-        .glass-card {
-            background: rgba(30, 35, 42, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        .light-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between antialiased">
 
     <!-- TOP RIBBON NAVIGATION -->
-    <header class="bg-slate-100 text-slate-900 border-b border-slate-200 w-full px-6 py-3">
+    <header class="bg-white text-slate-900 border-b border-slate-200 sticky top-0 z-50 shadow-sm w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             
             <!-- Logo Section -->
             <a href="#" onclick="switchTab('home')" class="flex items-center gap-3 group">
-                <img src="banner.png" alt="QSkip Logo" class="h-10 w-auto object-contain transition-transform group-hover:scale-105" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50/0F1215/22C55E?text=QSkip';">
+                <img src="banner.png" alt="QSkip Logo" class="h-10 w-auto object-contain transition-transform group-hover:scale-105" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50/F8FAFC/16A34A?text=QSkip';">
             </a>
 
             <!-- Navigation Links Ribbon -->
             <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
-                <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-brand-green bg-gray-800/60">
+                <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-brand-green bg-emerald-50 border border-emerald-100">
                     <i class="fa-solid fa-house mr-2"></i><span data-ka="მთავარი" data-en="Home">მთავარი</span>
                 </button>
-                <button onclick="switchTab('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-300 hover:text-white hover:bg-gray-800/40">
+                <button onclick="switchTab('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                     <i class="fa-solid fa-circle-info mr-2"></i><span data-ka="შესახებ" data-en="About">შესახებ</span>
                 </button>
-                <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-300 hover:text-white hover:bg-gray-800/40">
+                <button onclick="switchTab('contact')" id="nav-contact" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                     <i class="fa-solid fa-envelope mr-2"></i><span data-ka="დაგვიკავშირდით" data-en="Contact Us">დაგვიკავშირდით</span>
                 </button>
-                <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-gray-300 hover:text-white hover:bg-gray-800/40">
+                <button onclick="switchTab('faq')" id="nav-faq" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
                     <i class="fa-solid fa-circle-question mr-2"></i><span data-ka="ხდკ" data-en="FAQ">ხდკ</span>
                 </button>
             </nav>
 
             <!-- Language Switcher & Mobile Menu Trigger -->
             <div class="flex items-center gap-3">
-                <button onclick="toggleLanguage()" id="lang-btn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-gray-800 hover:bg-gray-700 text-brand-green border border-gray-700 transition flex items-center gap-2">
+                <button onclick="toggleLanguage()" id="lang-btn" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-emerald-700 border border-slate-200 transition flex items-center gap-2">
                     <i class="fa-solid fa-globe"></i> <span id="lang-label">EN</span>
                 </button>
 
                 <!-- Mobile Menu Button -->
-                <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white p-2">
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-slate-900 p-2">
                     <i class="fa-solid fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Dropdown Menu -->
-        <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-gray-800 px-4 pt-2 pb-4 space-y-2">
-            <button onclick="switchTab('home'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 hover:bg-gray-800 flex items-center gap-3">
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2 shadow-lg">
+            <button onclick="switchTab('home'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-slate-800 hover:bg-slate-100 flex items-center gap-3">
                 <i class="fa-solid fa-house text-brand-green"></i> <span data-ka="მთავარი" data-en="Home">მთავარი</span>
             </button>
-            <button onclick="switchTab('about'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 hover:bg-gray-800 flex items-center gap-3">
+            <button onclick="switchTab('about'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-slate-800 hover:bg-slate-100 flex items-center gap-3">
                 <i class="fa-solid fa-circle-info text-brand-blue"></i> <span data-ka="შესახებ" data-en="About">შესახებ</span>
             </button>
-            <button onclick="switchTab('contact'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 hover:bg-gray-800 flex items-center gap-3">
-                <i class="fa-solid fa-envelope text-purple-400"></i> <span data-ka="დაგვიკავშირდით" data-en="Contact Us">დაგვიკავშირდით</span>
+            <button onclick="switchTab('contact'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-slate-800 hover:bg-slate-100 flex items-center gap-3">
+                <i class="fa-solid fa-envelope text-purple-600"></i> <span data-ka="დაგვიკავშირდით" data-en="Contact Us">დაგვიკავშირდით</span>
             </button>
-            <button onclick="switchTab('faq'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-gray-200 hover:bg-gray-800 flex items-center gap-3">
-                <i class="fa-solid fa-circle-question text-yellow-400"></i> <span data-ka="ხდკ" data-en="FAQ">ხდკ</span>
+            <button onclick="switchTab('faq'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-slate-800 hover:bg-slate-100 flex items-center gap-3">
+                <i class="fa-solid fa-circle-question text-amber-500"></i> <span data-ka="ხდკ" data-en="FAQ">ხდკ</span>
             </button>
         </div>
     </header>
@@ -129,24 +131,24 @@
 
         <!-- ==================== HOME TAB ==================== -->
         <section id="tab-home" class="tab-content active transition-opacity duration-300">
-            <div class="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8 py-6 md:py-12">
+            <div class="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8 py-6 md:py-8">
                 
                 <!-- Upfront Logo Banner -->
-                <div class="bg-slate-100 p-6 rounded-2xl flex items-center justify-center">
-                    <img src="banner.png" alt="QSkip Full Logo" class="max-h-36 md:max-h-48 w-auto object-contain hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x200/0F1215/22C55E?text=QSkip+Digital+Queues';">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-center">
+                    <img src="banner.png" alt="QSkip Full Logo" class="max-h-36 md:max-h-48 w-auto object-contain hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x200/FFFFFF/16A34A?text=QSkip+Digital+Queues';">
                 </div>
 
                 <!-- Headline & Subtitle -->
                 <div class="space-y-4">
-                    <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-brand-green/10 text-brand-green border border-brand-green/30">
+                    <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
                         <i class="fa-solid fa-bolt mr-1.5"></i> SaaS & AI Digital Queuing
                     </span>
-                    <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight"
+                    <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight"
                         data-ka="მართე რიგი ციფრულად, დაზოგე დრო"
                         data-en="Manage Queues Digitally, Save Time">
                         მართე რიგი ციფრულად, დაზოგე დრო
                     </h1>
-                    <p class="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto font-normal leading-relaxed"
+                    <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto font-normal leading-relaxed"
                        data-ka="QSkip არის B2B2C ინოვაციური პლატფორმა, რომელიც ტრადიციულ ფიზიკურ რიგებს აციფრულებს. დადექი რიგში დისტანციურად და მიდი ადგილზე ზუსტად შენს ჯერზე."
                        data-en="QSkip is an innovative B2B2C platform digitizing traditional physical queues. Join lines remotely and arrive exactly when it's your turn.">
                         QSkip არის B2B2C ინოვაციური პლატფორმა, რომელიც ტრადიციულ ფიზიკურ რიგებს აციფრულებს. დადექი რიგში დისტანციურად და მიდი ადგილზე ზუსტად შენს ჯერზე.
@@ -155,41 +157,41 @@
 
                 <!-- CTA Redirect Buttons -->
                 <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto pt-4">
-                    <a href="https://qskip.ge/comingsoon" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-brand-green hover:bg-brand-greenHover text-gray-950 font-bold text-base transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-brand-green/20 flex items-center justify-center gap-3">
+                    <a href="https://qskip.ge/comingsoon" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-brand-green hover:bg-brand-greenHover text-white font-bold text-base transition-all duration-200 transform hover:-translate-y-0.5 shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-3">
                         <i class="fa-solid fa-download text-lg"></i>
                         <span data-ka="ჩამოტვირთე Android APK" data-en="Download Android APK">ჩამოტვირთე Android APK</span>
                     </a>
                     
-                    <a href="https://qskip.ge/comingsoon" class="w-full sm:w-auto px-8 py-4 rounded-2xl glass-card hover:bg-gray-800 text-white font-bold text-base border border-gray-700 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
+                    <a href="https://qskip.ge/comingsoon" class="w-full sm:w-auto px-8 py-4 rounded-2xl light-card hover:bg-slate-50 text-slate-900 font-bold text-base border border-slate-300 transition-all duration-200 transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
                         <i class="fa-solid fa-rocket text-brand-blue text-lg"></i>
                         <span data-ka="გახსენი Web App (Lovable)" data-en="Launch Web App (Lovable)">გახსენი Web App (Lovable)</span>
                     </a>
                 </div>
 
                 <!-- Feature Badges Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full pt-12">
-                    <div class="p-6 rounded-2xl glass-card text-left space-y-3">
-                        <div class="w-12 h-12 rounded-xl bg-brand-green/10 text-brand-green flex items-center justify-center text-xl font-bold">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full pt-10">
+                    <div class="p-6 rounded-2xl light-card text-left space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center text-xl font-bold">
                             <i class="fa-solid fa-mobile-screen-button"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white" data-ka="დისტანციური რიგი" data-en="Remote Queuing">დისტანციური რიგი</h3>
-                        <p class="text-sm text-gray-400" data-ka="არანაირი ფიზიკური აპარატი — ჩაეწერე პირდაპირ სმარტფონით." data-en="No hardware ticket machine needed — join lines directly from your phone.">არანაირი ფიზიკური აპარატი — ჩაეწერე პირდაპირ სმარტფონით.</p>
+                        <h3 class="text-lg font-bold text-slate-900" data-ka="დისტანციური რიგი" data-en="Remote Queuing">დისტანციური რიგი</h3>
+                        <p class="text-sm text-slate-600" data-ka="არანაირი ფიზიკური აპარატი — ჩაეწერე პირდაპირ სმარტფონით." data-en="No hardware ticket machine needed — join lines directly from your phone.">არანაირი ფიზიკური აპარატი — ჩაეწერე პირდაპირ სმარტფონით.</p>
                     </div>
 
-                    <div class="p-6 rounded-2xl glass-card text-left space-y-3">
-                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-brand-blue flex items-center justify-center text-xl font-bold">
+                    <div class="p-6 rounded-2xl light-card text-left space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center text-xl font-bold">
                             <i class="fa-solid fa-brain"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white" data-ka="AI ETA გამოთვლა" data-en="AI ETA Analytics">AI ETA გამოთვლა</h3>
-                        <p class="text-sm text-gray-400" data-ka="ხელოვნური ინტელექტი ითვლის მოსვლის ზუსტ დროს საცობებისა და ნაკადის მიხედვით." data-en="AI calculates exact arrival time based on traffic and service capacity.">ხელოვნური ინტელექტი ითვლის მოსვლის ზუსტ დროს საცობებისა და ნაკადის მიხედვით.</p>
+                        <h3 class="text-lg font-bold text-slate-900" data-ka="AI ETA გამოთვლა" data-en="AI ETA Analytics">AI ETA გამოთვლა</h3>
+                        <p class="text-sm text-slate-600" data-ka="ხელოვნური ინტელექტი ითვლის მოსვლის ზუსტ დროს საცობებისა და ნაკადის მიხედვით." data-en="AI calculates exact arrival time based on traffic and service capacity.">ხელოვნური ინტელექტი ითვლის მოსვლის ზუსტ დროს საცობებისა და ნაკადის მიხედვით.</p>
                     </div>
 
-                    <div class="p-6 rounded-2xl glass-card text-left space-y-3">
-                        <div class="w-12 h-12 rounded-xl bg-yellow-500/10 text-yellow-400 flex items-center justify-center text-xl font-bold">
+                    <div class="p-6 rounded-2xl light-card text-left space-y-3">
+                        <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 border border-amber-100 flex items-center justify-center text-xl font-bold">
                             <i class="fa-solid fa-crown"></i>
                         </div>
-                        <h3 class="text-lg font-bold text-white" data-ka="პრიორიტეტული რიგი" data-en="Priority Access">პრიორიტეტული რიგი</h3>
-                        <p class="text-sm text-gray-400" data-ka="ტურისტებისა და დატვირთული ხალხისთვის სწრაფი მომსახურების შესაძლებლობა." data-en="Fast-track service option designed for tourists and busy commuters.">ტურისტებისა და დატვირთული ხალხისთვის სწრაფი მომსახურების შესაძლებლობა.</p>
+                        <h3 class="text-lg font-bold text-slate-900" data-ka="პრიორიტეტული რიგი" data-en="Priority Access">პრიორიტეტული რიგი</h3>
+                        <p class="text-sm text-slate-600" data-ka="ტურისტებისა და დატვირთული ხალხისთვის სწრაფი მომსახურების შესაძლებლობა." data-en="Fast-track service option designed for tourists and busy commuters.">ტურისტებისა და დატვირთული ხალხისთვის სწრაფი მომსახურების შესაძლებლობა.</p>
                     </div>
                 </div>
 
@@ -202,113 +204,154 @@
             <div class="space-y-12 max-w-5xl mx-auto">
                 
                 <!-- Title Header -->
-                <div class="border-b border-gray-800 pb-6">
+                <div class="border-b border-slate-200 pb-6">
                     <span class="text-brand-green font-bold text-sm uppercase tracking-wider" data-ka="სტარტაპის შესახებ" data-en="About The Startup">სტარტაპის შესახებ</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1" data-ka="QSkip — პროექტისა და გუნდის მიმოხილვა" data-en="QSkip — Project & Team Overview">QSkip — პროექტისა და გუნდის მიმოხილვა</h2>
-                    <p class="text-gray-400 mt-2 text-base" data-ka="ინდუსტრია: ტექნოლოგიები (SaaS) / ციფრული ტრანსფორმაცია | მოთხოვნილი თანხა: 25,000 ₾" data-en="Industry: Tech (SaaS) / Digital Transformation | Requested Funding: 25,000 GEL">
-                        ინდუსტრია: ტექნოლოგიები (SaaS) / ციფრული ტრანსფორმაცია | მოთხოვნილი თანხა: 25,000 ₾
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-1" data-ka="QSkip — პროექტისა და გუნდის მიმოხილვა" data-en="QSkip — Project & Team Overview">QSkip — პროექტისა და გუნდის მიმოხილვა</h2>
+                    <p class="text-slate-600 mt-2 text-base" data-ka="ინდუსტრია: ტექნოლოგიები (SaaS) / ციფრული ტრანსფორმაცია" data-en="Industry: Tech (SaaS) / Digital Transformation">
+                        ინდუსტრია: ტექნოლოგიები (SaaS) / ციფრული ტრანსფორმაცია
                     </p>
                 </div>
 
                 <!-- Problem & Solution Visual Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Problem Card -->
-                    <div class="p-8 rounded-3xl glass-card border-l-4 border-l-red-500 space-y-4">
-                        <div class="flex items-center gap-3 text-red-400 font-bold text-xl">
+                    <div class="p-8 rounded-3xl light-card border-l-4 border-l-red-500 space-y-4">
+                        <div class="flex items-center gap-3 text-red-600 font-bold text-xl">
                             <i class="fa-solid fa-triangle-exclamation"></i>
                             <h3 data-ka="პრობლემა" data-en="The Problem">პრობლემა</h3>
                         </div>
-                        <p class="text-gray-300 text-sm leading-relaxed" data-ka="ფიზიკურ რიგებში დგომა იწვევს დროის კარგვასა და სტრესს. კვლევების მიხედვით, ადამიანი ცხოვრების განმავლობაში საშუალოდ 6 თვეს რიგებში ატარებს, ხოლო მომხმარებელთა 86% ერიდება სერვისს, სადაც გრძელ რიგს ხედავს. ტრადიციული ფიზიკური აპარატები ძვირია და მხოლოდ ადგილზე მყოფთათვის მუშაობს." data-en="Physical queues cause stress and wasted time. Research shows people spend 6 months of their lives waiting in lines, and 86% avoid businesses with visible long lines. Traditional ticket machines are expensive and hardware-bound.">
-                            ფიზიკურ რიგებში დგომა იწვევს დროის კარგვასა და სტრესს. კვლევების მიხედვით, ადამიანი ცხოვრების განმავლობაში საშუალოდ 6 თვეს რიგებში ატარებს, ხოლო მომხმარებელთა 86% ერიდება სერვისს, სადაც გრძელ რიგს ხედავს. ტრადიციული ფიზიკური აპარატები ძვირია და მხოლოდ ადგილზე მყოფთათვის მუშაობს.
+                        <p class="text-slate-600 text-sm leading-relaxed" data-ka="ფიზიკურ რიგებში დგომა იწვევს დროის კარგვასა და სტრესს. ბაზარზე არსებული სისტემები ძვირია და მხოლოდ ლოკალურად მუშაობს, ხოლო მომხმარებელს არ აქვს დისტანციურად რიგში ჩადგომის საშუალება." data-en="Physical queues cause stress and wasted time. Existing systems are expensive, locally bound, and users lack remote queue options.">
+                            ფიზიკურ რიგებში დგომა იწვევს დროის კარგვასა და სტრესს. ბაზარზე არსებული სისტემები ძვირია და მხოლოდ ლოკალურად მუშაობს, ხოლო მომხმარებელს არ აქვს დისტანციურად რიგში ჩადგომის საშუალება.
                         </p>
-                        <div class="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-300 font-semibold flex items-center justify-between">
-                            <span data-ka="მომხმარებელთა უარი გრძელ რიგებზე:" data-en="Users avoiding long queues:">მომხმარებელთა უარი გრძელ რიგებზე:</span>
-                            <span class="text-lg font-bold">86%</span>
+                        <div class="p-4 rounded-xl bg-red-50 border border-red-100 text-xs text-red-700 font-semibold flex items-center justify-between">
+                            <span data-ka="წლიური ზარალი ბიზნესისთვის:" data-en="Annual loss for businesses:">წლიური ზარალი ბიზნესისთვის:</span>
+                            <span class="text-lg font-bold">$38B+</span>
                         </div>
                     </div>
 
                     <!-- Solution Card -->
-                    <div class="p-8 rounded-3xl glass-card border-l-4 border-l-brand-green space-y-4">
-                        <div class="flex items-center gap-3 text-brand-green font-bold text-xl">
+                    <div class="p-8 rounded-3xl light-card border-l-4 border-l-brand-green space-y-4">
+                        <div class="flex items-center gap-3 text-emerald-600 font-bold text-xl">
                             <i class="fa-solid fa-circle-check"></i>
                             <h3 data-ka="გადაჭრა" data-en="The Solution">გადაჭრა</h3>
                         </div>
-                        <p class="text-gray-300 text-sm leading-relaxed" data-ka="QSkip არის B2B2C SaaS პლატფორმა, რომელიც ტრადიციულ რიგებს აციფრულებს. მომხმარებელს შეუძლია დისტანციურად ჩაეწეროს პარტნიორი ობიექტის რიგში, ადევნოს თვალი პროგრესს რეალურ დროში და მივიდეს ადგილზე ზუსტად თავის ჯერზე. არ მოითხოვს ფიზიკურ აპარატებს — პროცესი სრულად სმარტფონში ხდება." data-en="QSkip is a B2B2C SaaS platform digitizing queues. Users join lines remotely, track progress in real-time, and arrive just in time. No physical hardware required — everything runs seamlessly on smartphones.">
-                            QSkip არის B2B2C SaaS პლატფორმა, რომელიც ტრადიციულ რიგებს აციფრულებს. მომხმარებელს შეუძლია დისტანციურად ჩაეწეროს პარტნიორი ობიექტის რიგში, ადევნოს თვალი პროგრესს რეალურ დროში და მივიდეს ადგილზე ზუსტად თავის ჯერზე. არ მოითხოვს ფიზიკურ აპარატებს — პროცესი სრულად სმარტფონში ხდება.
+                        <p class="text-slate-600 text-sm leading-relaxed" data-ka="QSkip არის B2B2C SaaS პლატფორმა, რომელიც ტრადიციულ რიგებს აციფრულებს. მომხმარებელს შეუძლია დისტანციურად ჩაეწეროს პარტნიორი ობიექტის რიგში, ადევნოს თვალი პროგრესს რეალურ დროში და მივიდეს ადგილზე ზუსტად თავის ჯერზე." data-en="QSkip is a B2B2C SaaS platform digitizing queues. Users join lines remotely, track progress in real-time, and arrive right on time without hardware dependency.">
+                            QSkip არის B2B2C SaaS პლატფორმა, რომელიც ტრადიციულ რიგებს აციფრულებს. მომხმარებელს შეუძლია დისტანციურად ჩაეწეროს პარტნიორი ობიექტის რიგში, ადევნოს თვალი პროგრესს რეალურ დროში და მივიდეს ადგილზე ზუსტად თავის ჯერზე.
                         </p>
-                        <div class="p-4 rounded-xl bg-brand-green/10 border border-brand-green/20 text-xs text-brand-green font-semibold flex items-center justify-between">
-                            <span data-ka="სივრცეში დაზოგილი დრო:" data-en="Time saved in line:">სივრცეში დაზოგილი დრო:</span>
+                        <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-100 text-xs text-emerald-700 font-semibold flex items-center justify-between">
+                            <span data-ka="რიგში ლოდინი & მართვა:" data-en="Queue wait & management:">რიგში ლოდინი & მართვა:</span>
                             <span class="text-lg font-bold">100% Remote</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Interactive Data Charts Section -->
-                <div class="p-8 rounded-3xl glass-card space-y-6">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-chart-pie text-brand-green"></i>
-                        <span data-ka="მონეტიზაციის მოდელი & AI არქიტექტურა" data-en="Monetization Model & AI Architecture">მონეტიზაციის მოდელი & AI არქიტექტურა</span>
+                <!-- Key Market Statistics Grid (From Presentation Slide 3 & 4) -->
+                <div class="space-y-6">
+                    <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-chart-column text-brand-green"></i>
+                        <span data-ka="ბაზრის ძირითადი სტატისტიკა" data-en="Key Market Statistics">ბაზრის ძირითადი სტატისტიკა</span>
                     </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="p-6 rounded-2xl light-card text-center space-y-2 border-t-4 border-t-emerald-500">
+                            <span class="text-3xl font-extrabold text-slate-900 block">6+ თვე</span>
+                            <p class="text-xs text-slate-600 font-medium" data-ka="საშუალოდ რიგებში დაკარგული დრო ადამიანის ცხოვრებაში" data-en="Average lifetime spent waiting in queues">საშუალოდ რიგებში დაკარგული დრო ადამიანის ცხოვრებაში</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl light-card text-center space-y-2 border-t-4 border-t-blue-500">
+                            <span class="text-3xl font-extrabold text-slate-900 block">86%</span>
+                            <p class="text-xs text-slate-600 font-medium" data-ka="ერიდება ობიექტს, სადაც ხედავს ხანგრძლივ ცოცხალ რიგს" data-en="Avoids venues with visible long physical queues">ერიდება ობიექტს, სადაც ხედავს ხანგრძლივ ცოცხალ რიგს</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl light-card text-center space-y-2 border-t-4 border-t-amber-500">
+                            <span class="text-3xl font-extrabold text-slate-900 block">73%</span>
+                            <p class="text-xs text-slate-600 font-medium" data-ka="ურჩევნია ადგილის დაჯავშნა ან ციფრულ რიგში ლოდინი" data-en="Prefers online booking or dynamic digital waitlists">ურჩევნია ადგილის დაჯავშნა ან ციფრულ რიგში ლოდინი</p>
+                        </div>
+
+                        <div class="p-6 rounded-2xl light-card text-center space-y-2 border-t-4 border-t-red-500">
+                            <span class="text-3xl font-extrabold text-slate-900 block">$38B+</span>
+                            <p class="text-xs text-slate-600 font-medium" data-ka="წლიური ფინანსური ზარალი ბიზნესისთვის ხანგრძლივი ლოდინის გამო" data-en="Annual revenue loss for businesses due to long wait times">წლიური ფინანსური ზარალი ბიზნესისთვის ხანგრძლივი ლოდინის გამო</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Data Visuals Section (Queue Drop-Off Rate Chart) -->
+                <div class="p-8 rounded-3xl light-card space-y-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-brand-blue" data-ka="კვლევის შედეგები" data-en="Research Findings">კვლევის შედეგები</span>
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2 mt-1">
+                            <i class="fa-solid fa-user-xmark text-red-500"></i>
+                            <span data-ka="მომხმარებელთა მიერ რიგის მიტოვების შეფასება ლოდინის დროის მიხედვით" data-en="Customer Abandonment Rate by Waiting Time">მომხმარებელთა მიერ რიგის მიტოვების შეფასება ლოდინის დროის მიხედვით</span>
+                        </h3>
+                    </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                         <!-- Chart container -->
-                        <div class="relative h-64 w-full flex justify-center items-center">
-                            <canvas id="monetizationChart"></canvas>
+                        <div class="relative h-64 w-full bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                            <canvas id="abandonmentChart"></canvas>
                         </div>
 
-                        <!-- Content Details -->
-                        <div class="space-y-4 text-sm text-gray-300">
-                            <div class="p-4 rounded-xl bg-gray-800/60 border border-gray-700/50">
-                                <h4 class="font-bold text-white mb-1" data-ka="🤖 AI ETA & წინასწარი ჯავშანი" data-en="🤖 AI ETA & Pre-booking">🤖 AI ETA & წინასწარი ჯავშანი</h4>
-                                <p data-ka="ხელოვნური ინტელექტი ითვალისწინებს საგზაო მოძრაობას, ობიექტის დატვირთვასა და მომსახურების საშუალო სიჩქარეს. Machine Learning ალგორითმები ეხმარება ბიზნესებს პერსონალის სწორად გადანაწილებაში."
-                                   data-en="AI accounts for road traffic, venue capacity, and service speed. ML algorithms help venues allocate staff resource efficiently.">
-                                    ხელოვნური ინტელექტი ითვალისწინებს საგზაო მოძრაობას, ობიექტის დატვირთვასა და მომსახურების საშუალო სიჩქარეს. Machine Learning ალგორითმები ეხმარება ბიზნესებს პერსონალის სწორად გადანაწილებაში.
+                        <!-- Analysis Details -->
+                        <div class="space-y-4 text-sm text-slate-600">
+                            <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                                <h4 class="font-bold text-slate-900 mb-1" data-ka="📉 კრიტიკული ზღვარი: 5-10 წუთი" data-en="📉 Critical Threshold: 5-10 Minutes">📉 კრიტიკული ზღვარი: 5-10 წუთი</h4>
+                                <p data-ka="მონაცემები აჩვენებს, რომ ლოდინის დროის 5 წუთამდე გაზრდისას რიგის მიტოვების მაჩვენებელი მკვეთრად იზრდება 25%-დან 59%-მდე, ხოლო 10 წუთზე მეტი ლოდინისას მომხმარებელთა 73% ტოვებს ობიექტს."
+                                   data-en="Data indicates that as waiting time crosses 5 minutes, customer drop-off spikes drastically from 25% to 59%, reaching 73% after 10 minutes.">
+                                    მონაცემები აჩვენებს, რომ ლოდინის დროის 5 წუთამდე გაზრდისას რიგის მიტოვების მაჩვენებელი მკვეთრად იზრდება 25%-დან 59%-მდე, ხოლო 10 წუთზე მეტი ლოდინისას მომხმარებელთა 73% ტოვებს ობიექტს.
                                 </p>
                             </div>
 
-                            <div class="p-4 rounded-xl bg-gray-800/60 border border-gray-700/50">
-                                <h4 class="font-bold text-white mb-1" data-ka="💎 Priority Queues (პრიორიტეტული რიგები)" data-en="💎 Priority Queues">💎 Priority Queues (პრიორიტეტული რიგები)</h4>
-                                <p data-ka="ფასიანი სწრაფი რიგი ტურისტებისა და დატვირთული მომხმარებლებისთვის. ამ სერვისიდან მიღებული მოგება თანაბრად იყოფა პარტნიორ ობიექტთან."
-                                   data-en="Paid fast-track queue ideal for tourists and busy individuals. Revenue generated is shared directly with partner venues.">
-                                    ფასიანი სწრაფი რიგი ტურისტებისა და დატვირთული მომხმარებლებისთვის. ამ სერვისიდან მიღებული მოგება თანაბრად იყოფა პარტნიორ ობიექტთან.
+                            <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-800">
+                                <h4 class="font-bold text-emerald-900 mb-1" data-ka="💡 QSkip-ის ეფექტი" data-en="💡 QSkip Impact">💡 QSkip-ის ეფექტი</h4>
+                                <p data-ka="დისტანციური ჩაწერითა და ზუსტი live ETA შეტყობინებებით, QSkip პრაქტიკულად ანულებს ადგილზე ფიზიკური ლოდინის დროს, რაც მკვეთრად ამცირებს უარის თქმის მაჩვენებელს."
+                                   data-en="With remote queuing and dynamic live ETA updates, QSkip eliminates local physical waiting, dramatically curbing customer abandonment.">
+                                    დისტანციური ჩაწერითა და ზუსტი live ETA შეტყობინებებით, QSkip პრაქტიკულად ანულებს ადგილზე ფიზიკური ლოდინის დროს, რაც მკვეთრად ამცირებს უარის თქმის მაჩვენებელს.
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Go To Market Strategy & B2B / B2C Targets -->
+                <!-- Product Value Benefits & Business Impact (From Presentation Slides) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="p-8 rounded-3xl glass-card space-y-4">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-bullseye text-brand-blue"></i>
-                            <span data-ka="სამიზნე აუდიტორია" data-en="Target Audience">სამიზნე აუდიტორია</span>
+                    <div class="p-8 rounded-3xl light-card space-y-4">
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-user-check text-brand-green"></i>
+                            <span data-ka="სარგებელი მომხმარებლისთვის" data-en="User Benefits">სარგებელი მომხმარებლისთვის</span>
                         </h3>
-                        <ul class="space-y-3 text-sm text-gray-300">
+                        <ul class="space-y-3 text-sm text-slate-600">
                             <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-users text-brand-green mt-1"></i>
-                                <span><strong>B2C:</strong> <span data-ka="უცხოელი ტურისტები (რომელთაც დრო შეზღუდული აქვთ) და ადგილობრივი მაცხოვრებლები." data-en="Foreign tourists (limited time in country) & local residents.">უცხოელი ტურისტები (რომელთაც დრო შეზღუდული აქვთ) და ადგილობრივი მაცხოვრებლები.</span></span>
+                                <i class="fa-solid fa-hourglass-half text-brand-green mt-1"></i>
+                                <span><strong class="text-slate-900" data-ka="მეტი თავისუფალი დრო:" data-en="More Free Time:">მეტი თავისუფალი დრო:</strong> <span data-ka="ლოდინის დროის ნაცვლად საკუთარი საქმეებით დაკავება." data-en="Use waiting time productively instead of standing in line.">ლოდინის დროის ნაცვლად საკუთარი საქმეებით დაკავება.</span></span>
                             </li>
                             <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-store text-brand-blue mt-1"></i>
-                                <span><strong>B2B:</strong> <span data-ka="კაფე-რესტორნები, მუზეუმები, კლინიკები და ტურისტულ ზონებში მოქმედი ობიექტები." data-en="Cafes, restaurants, museums, clinics, and businesses in high-footfall areas.">კაფე-რესტორნები, მუზეუმები, კლინიკები და ტურისტულ ზონებში მოქმედი ობიექტები.</span></span>
+                                <i class="fa-solid fa-face-smile text-brand-green mt-1"></i>
+                                <span><strong class="text-slate-900" data-ka="ნაკლები სტრესი:" data-en="Less Stress:">ნაკლები სტრესი:</strong> <span data-ka="არანაირი გაურკვევლობა რიგის ხანგრძლივობასთან დაკავშირებით." data-en="Eliminate uncertainty surrounding queue lengths.">არანაირი გაურკვევლობა რიგის ხანგრძლივობასთან დაკავშირებით.</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-bell text-brand-green mt-1"></i>
+                                <span><strong class="text-slate-900" data-ka="ზუსტი ETA & შეტყობინებები:" data-en="Accurate ETA & Alerts:">ზუსტი ETA & შეტყობინებები:</strong> <span data-ka="რეალური დროის განახლებები სმარტფონზე." data-en="Live updates and notifications on your mobile device.">რეალური დროის განახლებები სმარტფონზე.</span></span>
                             </li>
                         </ul>
                     </div>
 
-                    <div class="p-8 rounded-3xl glass-card space-y-4">
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <i class="fa-solid fa-rocket text-yellow-400"></i>
-                            <span data-ka="Go-to-Market სტრატეგია" data-en="Go-To-Market Strategy">Go-to-Market სტრატეგია</span>
+                    <div class="p-8 rounded-3xl light-card space-y-4">
+                        <h3 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-brand-blue"></i>
+                            <span data-ka="შედეგები ბიზნესისთვის" data-en="Business Impact">შედეგები ბიზნესისთვის</span>
                         </h3>
-                        <ul class="space-y-3 text-sm text-gray-300">
+                        <ul class="space-y-3 text-sm text-slate-600">
                             <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-check-double text-yellow-400 mt-1"></i>
-                                <span><strong>B2B Beta:</strong> <span data-ka="10 პოპულარული კაფე და მუზეუმი ტურისტულ ზონებში — 3-თვიანი უფასო სატესტო პერიოდი." data-en="10 popular cafes/museums in tourist zones — 3-month free beta testing.">10 პოპულარული კაფე და მუზეუმი ტურისტულ ზონებში — 3-თვიანი უფასო სატესტო პერიოდი.</span></span>
+                                <i class="fa-solid fa-people-roof text-brand-blue mt-1"></i>
+                                <span><strong class="text-slate-900" data-ka="ნაკლები ქაოსი:" data-en="Less Venue Chaos:">ნაკლები ქაოსი:</strong> <span data-ka="ობიექტის ტერიტორიაზე ხალხმრავლობისა და რიგების შემცირება." data-en="Reduce physical congestion in customer waiting areas.">ობიექტის ტერიტორიაზე ხალხმრავლობისა და რიგების შემცირება.</span></span>
                             </li>
                             <li class="flex items-start gap-3">
-                                <i class="fa-solid fa-qrcode text-brand-green mt-1"></i>
-                                <span><strong>B2C QR Codes:</strong> <span data-ka="მაგიდებსა და ფიზიკურ სადგომებთან განთავსებული QR კოდები აპლიკაციის სწრაფი ჩამოტვირთვისთვის." data-en="QR codes on venue tables and entry stands for instant app download.">მაგიდებსა და ფიზიკურ სადგომებთან განთავსებული QR კოდები აპლიკაციის სწრაფი ჩამოტვირთვისთვის.</span></span>
+                                <i class="fa-solid fa-arrow-trend-down text-brand-blue mt-1"></i>
+                                <span><strong class="text-slate-900" data-ka="შემცირებული უარის თქმა:" data-en="Reduced Drop-off Rate:">შემცირებული უარის თქმა:</strong> <span data-ka="მომხმარებელთა შენარჩუნება ციფრული რიგის მეშვეობით." data-en="Retain customers who would otherwise leave due to lines.">მომხმარებელთა შენარჩუნება ციფრული რიგის მეშვეობით.</span></span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fa-solid fa-sliders text-brand-blue mt-1"></i>
+                                <span><strong class="text-slate-900" data-ka="რესურსების გადანაწილება:" data-en="Resource Allocation:">რესურსების გადანაწილება:</strong> <span data-ka="პერსონალის ეფექტური მართვა დატვირთვის მიხედვით." data-en="Optimize staff allocation according to live traffic data.">პერსონალის ეფექტური მართვა დატვირთვის მიხედვით.</span></span>
                             </li>
                         </ul>
                     </div>
@@ -318,68 +361,68 @@
                 <div class="space-y-6">
                     <div class="text-center space-y-2">
                         <span class="text-brand-green font-bold text-xs uppercase tracking-widest" data-ka="გუნდი" data-en="The Team">გუნდი</span>
-                        <h3 class="text-2xl sm:text-3xl font-extrabold text-white" data-ka="გუნდი: ფიზმათGPT" data-en="Team: PhyzMathGPT">გუნდი: ფიზმათGPT</h3>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900" data-ka="გუნდი: ფიზმათGPT" data-en="Team: PhyzMathGPT">გუნდი: ფიზმათGPT</h3>
                     </div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Member 1 -->
-                        <div class="p-6 rounded-2xl glass-card border border-gray-800 space-y-3 hover:border-brand-green/50 transition duration-300">
-                            <div class="w-12 h-12 rounded-xl bg-brand-green/20 text-brand-green flex items-center justify-center font-bold text-lg">
+                        <div class="p-6 rounded-2xl light-card space-y-3 hover:border-emerald-400 transition duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-lg">
                                 AN
                             </div>
                             <div>
-                                <h4 class="text-lg font-bold text-white">ავთანდილ ნიკოლეიშვილი</h4>
-                                <p class="text-xs text-brand-green font-semibold" data-ka="გუნდის ლიდერი, მთავარი დეველოპერი" data-en="Team Leader, Lead Developer">გუნდის ლიდერი, მთავარი დეველოპერი</p>
+                                <h4 class="text-lg font-bold text-slate-900">ავთანდილ ნიკოლეიშვილი</h4>
+                                <p class="text-xs text-emerald-700 font-semibold" data-ka="გუნდის ლიდერი, მთავარი დეველოპერი" data-en="Team Leader, Lead Developer">გუნდის ლიდერი, მთავარი დეველოპერი</p>
                             </div>
-                            <p class="text-xs text-gray-400" data-ka="პროდუქტის არქიტექტორი და ტექნიკური სისტემის ავტორი." data-en="Product Architect and Lead Technical Engineer.">პროდუქტის არქიტექტორი და ტექნიკური სისტემის ავტორი.</p>
+                            <p class="text-xs text-slate-600" data-ka="პროდუქტის არქიტექტორი და ტექნიკური სისტემის ავტორი." data-en="Product Architect and Lead Technical Engineer.">პროდუქტის არქიტექტორი და ტექნიკური სისტემის ავტორი.</p>
                         </div>
 
                         <!-- Member 2 -->
-                        <div class="p-6 rounded-2xl glass-card border border-gray-800 space-y-3 hover:border-brand-blue/50 transition duration-300">
-                            <div class="w-12 h-12 rounded-xl bg-brand-blue/20 text-brand-blue flex items-center justify-center font-bold text-lg">
+                        <div class="p-6 rounded-2xl light-card space-y-3 hover:border-blue-400 transition duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-800 flex items-center justify-center font-bold text-lg">
                                 EB
                             </div>
                             <div>
-                                <h4 class="text-lg font-bold text-white">ელენე ბერაძე</h4>
-                                <p class="text-xs text-brand-blue font-semibold" data-ka="UI/UX & UX Researcher" data-en="UI/UX & UX Researcher">UI/UX & UX Researcher</p>
+                                <h4 class="text-lg font-bold text-slate-900">ელენე ბერაძე</h4>
+                                <p class="text-xs text-blue-700 font-semibold" data-ka="UI/UX & UX Researcher" data-en="UI/UX & UX Researcher">UI/UX & UX Researcher</p>
                             </div>
-                            <p class="text-xs text-gray-400" data-ka="მომხმარებლის გამოცდილების და ინტერფეისის მკვლევარი." data-en="User Experience and Interface Design Research.">მომხმარებლის გამოცდილების და ინტერფეისის მკვლევარი.</p>
+                            <p class="text-xs text-slate-600" data-ka="მომხმარებლის გამოცდილების და ინტერფეისის მკვლევარი." data-en="User Experience and Interface Design Research.">მომხმარებლის გამოცდილების და ინტერფეისის მკვლევარი.</p>
                         </div>
 
                         <!-- Member 3 -->
-                        <div class="p-6 rounded-2xl glass-card border border-gray-800 space-y-3 hover:border-purple-500/50 transition duration-300">
-                            <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-lg">
+                        <div class="p-6 rounded-2xl light-card space-y-3 hover:border-purple-400 transition duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-800 flex items-center justify-center font-bold text-lg">
                                 MO
                             </div>
                             <div>
-                                <h4 class="text-lg font-bold text-white">მაქსიმე ორმოცაძე</h4>
-                                <p class="text-xs text-purple-400 font-semibold" data-ka="ბაზრის კვლევა & Data Analysis" data-en="Market Research & Data Analysis">ბაზრის კვლევა & Data Analysis</p>
+                                <h4 class="text-lg font-bold text-slate-900">მაქსიმე ორმოცაძე</h4>
+                                <p class="text-xs text-purple-700 font-semibold" data-ka="ბაზრის კვლევა & Data Analysis" data-en="Market Research & Data Analysis">ბაზრის კვლევა & Data Analysis</p>
                             </div>
-                            <p class="text-xs text-gray-400" data-ka="ბაზრის ტენდენციებისა და მონაცემთა ანალიტიკის ხელმძღვანელი." data-en="Market trends analyst and data optimization lead.">ბაზრის ტენდენციებისა და მონაცემთა ანალიტიკის ხელმძღვანელი.</p>
+                            <p class="text-xs text-slate-600" data-ka="ბაზრის ტენდენციებისა და მონაცემთა ანალიტიკის ხელმძღვანელი." data-en="Market trends analyst and data optimization lead.">ბაზრის ტენდენციებისა და მონაცემთა ანალიტიკის ხელმძღვანელი.</p>
                         </div>
 
                         <!-- Member 4 -->
-                        <div class="p-6 rounded-2xl glass-card border border-gray-800 space-y-3 hover:border-yellow-500/50 transition duration-300">
-                            <div class="w-12 h-12 rounded-xl bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold text-lg">
+                        <div class="p-6 rounded-2xl light-card space-y-3 hover:border-amber-400 transition duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold text-lg">
                                 NG
                             </div>
                             <div>
-                                <h4 class="text-lg font-bold text-white">ნიკოლოზ გველესიანი</h4>
-                                <p class="text-xs text-yellow-400 font-semibold" data-ka="ბიზნესის განვითარება" data-en="Business Development">ბიზნესის განვითარება</p>
+                                <h4 class="text-lg font-bold text-slate-900">ნიკოლოზ გველესიანი</h4>
+                                <p class="text-xs text-amber-700 font-semibold" data-ka="ბიზნესის განვითარება" data-en="Business Development">ბიზნესის განვითარება</p>
                             </div>
-                            <p class="text-xs text-gray-400" data-ka="პარტნიორი ობიექტების მოძიება და B2B კომუნიკაცია." data-en="B2B partner outreach and business growth strategies.">პარტნიორი ობიექტების მოძიება და B2B კომუნიკაცია.</p>
+                            <p class="text-xs text-slate-600" data-ka="პარტნიორი ობიექტების მოძიება და B2B კომუნიკაცია." data-en="B2B partner outreach and business growth strategies.">პარტნიორი ობიექტების მოძიება და B2B კომუნიკაცია.</p>
                         </div>
 
                         <!-- Member 5 -->
-                        <div class="p-6 rounded-2xl glass-card border border-gray-800 space-y-3 hover:border-pink-500/50 transition duration-300">
-                            <div class="w-12 h-12 rounded-xl bg-pink-500/20 text-pink-400 flex items-center justify-center font-bold text-lg">
+                        <div class="p-6 rounded-2xl light-card space-y-3 hover:border-pink-400 transition duration-300">
+                            <div class="w-12 h-12 rounded-xl bg-pink-100 text-pink-800 flex items-center justify-center font-bold text-lg">
                                 TC
                             </div>
                             <div>
-                                <h4 class="text-lg font-bold text-white">თეკლა ჩოგოვაძე</h4>
-                                <p class="text-xs text-pink-400 font-semibold" data-ka="ბრენდინგი & Creative Lead" data-en="Branding & Creative Lead">ბრენდინგი & Creative Lead</p>
+                                <h4 class="text-lg font-bold text-slate-900">თეკლა ჩოგოვაძე</h4>
+                                <p class="text-xs text-pink-700 font-semibold" data-ka="ბრენდინგი & Creative Lead" data-en="Branding & Creative Lead">ბრენდინგი & Creative Lead</p>
                             </div>
-                            <p class="text-xs text-gray-400" data-ka="ვიზუალური იდენტობა, კრეატიული მიმართულება და მარკეტინგი." data-en="Visual brand identity and creative direction lead.">ვიზუალური იდენტობა, კრეატიული მიმართულება და მარკეტინგი.</p>
+                            <p class="text-xs text-slate-600" data-ka="ვიზუალური იდენტობა, კრეატიული მიმართულება და მარკეტინგი." data-en="Visual brand identity and creative direction lead.">ვიზუალური იდენტობა, კრეატიული მიმართულება და მარკეტინგი.</p>
                         </div>
                     </div>
                 </div>
@@ -395,100 +438,100 @@
                 <!-- Section Header -->
                 <div class="text-center space-y-3">
                     <span class="text-brand-green font-bold text-xs uppercase tracking-widest" data-ka="კონტაქტი" data-en="Contact Us">კონტაქტი</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white" data-ka="დაგვიკავშირდით QSkip გუნდს" data-en="Get in Touch with QSkip Team">დაგვიკავშირდით QSkip გუნდს</h2>
-                    <p class="text-gray-400 text-sm max-w-lg mx-auto" data-ka="გაქვთ შეკითხვები ან გსურთ პარტნიორობა? მოგვწერეთ ნებისმიერ დროს." data-en="Have questions or interested in partnership? Reach out to us anytime.">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900" data-ka="დაგვიკავშირდით QSkip გუნდს" data-en="Get in Touch with QSkip Team">დაგვიკავშირდით QSkip გუნდს</h2>
+                    <p class="text-slate-600 text-sm max-w-lg mx-auto" data-ka="გაქვთ შეკითხვები ან გსურთ პარტნიორობა? მოგვწერეთ ნებისმიერ დროს." data-en="Have questions or interested in partnership? Reach out to us anytime.">
                         გაქვთ შეკითხვები ან გსურთ პარტნიორობა? მოგვწერეთ ნებისმიერ დროს.
                     </p>
                 </div>
 
                 <!-- Main Official Contacts -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <a href="mailto:contact@qskip.ge" class="p-6 rounded-2xl glass-card border border-gray-800 hover:border-brand-green flex items-center gap-4 group transition">
-                        <div class="w-14 h-14 rounded-2xl bg-brand-green/10 text-brand-green flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                    <a href="mailto:contact@qskip.ge" class="p-6 rounded-2xl light-card hover:border-emerald-500 flex items-center gap-4 group transition">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-600 flex items-center justify-center text-2xl group-hover:scale-110 transition">
                             <i class="fa-solid fa-paper-plane"></i>
                         </div>
                         <div>
-                            <span class="text-xs text-gray-400 block font-medium" data-ka="ოფიციალური ელ-ფოსტა" data-en="Official Email">ოფიციალური ელ-ფოსტა</span>
-                            <span class="text-lg font-bold text-white group-hover:text-brand-green transition">contact@qskip.ge</span>
+                            <span class="text-xs text-slate-500 block font-medium" data-ka="ოფიციალური ელ-ფოსტა" data-en="Official Email">ოფიციალური ელ-ფოსტა</span>
+                            <span class="text-lg font-bold text-slate-900 group-hover:text-emerald-600 transition">contact@qskip.ge</span>
                         </div>
                     </a>
 
-                    <a href="https://instagram.com/qskip_" target="_blank" class="p-6 rounded-2xl glass-card border border-gray-800 hover:border-pink-500 flex items-center gap-4 group transition">
-                        <div class="w-14 h-14 rounded-2xl bg-pink-500/10 text-pink-500 flex items-center justify-center text-2xl group-hover:scale-110 transition">
+                    <a href="https://instagram.com/qskip_" target="_blank" class="p-6 rounded-2xl light-card hover:border-pink-500 flex items-center gap-4 group transition">
+                        <div class="w-14 h-14 rounded-2xl bg-pink-50 border border-pink-100 text-pink-600 flex items-center justify-center text-2xl group-hover:scale-110 transition">
                             <i class="fa-brands fa-instagram"></i>
                         </div>
                         <div>
-                            <span class="text-xs text-gray-400 block font-medium" data-ka="ინსტაგრამის გვერდი" data-en="Instagram Page">ინსტაგრამის გვერდი</span>
-                            <span class="text-lg font-bold text-white group-hover:text-pink-400 transition">@qskip_</span>
+                            <span class="text-xs text-slate-500 block font-medium" data-ka="ინსტაგრამის გვერდი" data-en="Instagram Page">ინსტაგრამის გვერდი</span>
+                            <span class="text-lg font-bold text-slate-900 group-hover:text-pink-600 transition">@qskip_</span>
                         </div>
                     </a>
                 </div>
 
                 <!-- Individual Team Contact Info Table/List -->
-                <div class="p-8 rounded-3xl glass-card space-y-6">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-3">
+                <div class="p-8 rounded-3xl light-card space-y-6">
+                    <h3 class="text-xl font-bold text-slate-900 flex items-center gap-3">
                         <i class="fa-solid fa-address-book text-brand-blue"></i>
                         <span data-ka="გუნდის წევრების საკონტაქტო ინფორმაცია" data-en="Individual Team Member Contacts">გუნდის წევრების საკონტაქტო ინფორმაცია</span>
                     </h3>
 
-                    <div class="divide-y divide-gray-800/80">
+                    <div class="divide-y divide-slate-200">
                         <!-- Member 1 -->
                         <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <div>
-                                <h4 class="font-bold text-white text-base">ავთანდილ ნიკოლეიშვილი</h4>
-                                <span class="text-xs text-brand-green" data-ka="მთავარი დეველოპერი, პროდუქტის არქიტექტორი" data-en="Lead Developer, Product Architect">მთავარი დეველოპერი, პროდუქტის არქიტექტორი</span>
+                                <h4 class="font-bold text-slate-900 text-base">ავთანდილ ნიკოლეიშვილი</h4>
+                                <span class="text-xs text-emerald-700 font-semibold" data-ka="მთავარი დეველოპერი, პროდუქტის არქიტექტორი" data-en="Lead Developer, Product Architect">მთავარი დეველოპერი, პროდუქტის არქიტექტორი</span>
                             </div>
-                            <div class="flex flex-col sm:items-end text-xs text-gray-300 gap-1">
-                                <a href="tel:595956795" class="hover:text-brand-green transition"><i class="fa-solid fa-phone mr-1.5 text-gray-500"></i>595 95 67 95</a>
-                                <a href="mailto:nikoleishvili.avtandili@gmail.com" class="hover:text-brand-green transition"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i>nikoleishvili.avtandili@gmail.com</a>
+                            <div class="flex flex-col sm:items-end text-xs text-slate-600 gap-1">
+                                <a href="tel:595956795" class="hover:text-emerald-600 transition"><i class="fa-solid fa-phone mr-1.5 text-slate-400"></i>595 95 67 95</a>
+                                <a href="mailto:nikoleishvili.avtandili@gmail.com" class="hover:text-emerald-600 transition"><i class="fa-solid fa-envelope mr-1.5 text-slate-400"></i>nikoleishvili.avtandili@gmail.com</a>
                             </div>
                         </div>
 
                         <!-- Member 2 -->
                         <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <div>
-                                <h4 class="font-bold text-white text-base">ელენე ბერაძე</h4>
-                                <span class="text-xs text-brand-blue" data-ka="UI/UX და მომხმარებლის გამოცდილების მკვლევარი" data-en="UI/UX & User Experience Researcher">UI/UX და მომხმარებლის გამოცდილების მკვლევარი</span>
+                                <h4 class="font-bold text-slate-900 text-base">ელენე ბერაძე</h4>
+                                <span class="text-xs text-blue-700 font-semibold" data-ka="UI/UX და მომხმარებლის გამოცდილების მკვლევარი" data-en="UI/UX & User Experience Researcher">UI/UX და მომხმარებლის გამოცდილების მკვლევარი</span>
                             </div>
-                            <div class="flex flex-col sm:items-end text-xs text-gray-300 gap-1">
-                                <a href="tel:592079992" class="hover:text-brand-blue transition"><i class="fa-solid fa-phone mr-1.5 text-gray-500"></i>592 07 99 92</a>
-                                <a href="mailto:eleneberadze570@gmail.com" class="hover:text-brand-blue transition"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i>eleneberadze570@gmail.com</a>
+                            <div class="flex flex-col sm:items-end text-xs text-slate-600 gap-1">
+                                <a href="tel:592079992" class="hover:text-blue-600 transition"><i class="fa-solid fa-phone mr-1.5 text-slate-400"></i>592 07 99 92</a>
+                                <a href="mailto:eleneberadze570@gmail.com" class="hover:text-blue-600 transition"><i class="fa-solid fa-envelope mr-1.5 text-slate-400"></i>eleneberadze570@gmail.com</a>
                             </div>
                         </div>
 
                         <!-- Member 3 -->
                         <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <div>
-                                <h4 class="font-bold text-white text-base">მაქსიმე ორმოცაძე</h4>
-                                <span class="text-xs text-purple-400" data-ka="ბაზრის კვლევა და მონაცემთა ანალიზი" data-en="Market Research & Data Analysis">ბაზრის კვლევა და მონაცემთა ანალიზი</span>
+                                <h4 class="font-bold text-slate-900 text-base">მაქსიმე ორმოცაძე</h4>
+                                <span class="text-xs text-purple-700 font-semibold" data-ka="ბაზრის კვლევა და მონაცემთა ანალიზი" data-en="Market Research & Data Analysis">ბაზრის კვლევა და მონაცემთა ანალიზი</span>
                             </div>
-                            <div class="flex flex-col sm:items-end text-xs text-gray-300 gap-1">
-                                <a href="tel:597800734" class="hover:text-purple-400 transition"><i class="fa-solid fa-phone mr-1.5 text-gray-500"></i>597 80 07 34</a>
-                                <a href="mailto:maxmax09142011@gmail.com" class="hover:text-purple-400 transition"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i>maxmax09142011@gmail.com</a>
+                            <div class="flex flex-col sm:items-end text-xs text-slate-600 gap-1">
+                                <a href="tel:597800734" class="hover:text-purple-600 transition"><i class="fa-solid fa-phone mr-1.5 text-slate-400"></i>597 80 07 34</a>
+                                <a href="mailto:maxmax09142011@gmail.com" class="hover:text-purple-600 transition"><i class="fa-solid fa-envelope mr-1.5 text-slate-400"></i>maxmax09142011@gmail.com</a>
                             </div>
                         </div>
 
                         <!-- Member 4 -->
                         <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <div>
-                                <h4 class="font-bold text-white text-base">ნიკოლოზ გველესიანი</h4>
-                                <span class="text-xs text-yellow-400" data-ka="ბიზნესის განვითარება და პარტნიორების მოძიება" data-en="Business Development & Partner Outreach">ბიზნესის განვითარება და პარტნიორების მოძიება</span>
+                                <h4 class="font-bold text-slate-900 text-base">ნიკოლოზ გველესიანი</h4>
+                                <span class="text-xs text-amber-700 font-semibold" data-ka="ბიზნესის განვითარება და პარტნიორების მოძიება" data-en="Business Development & Partner Outreach">ბიზნესის განვითარება და პარტნიორების მოძიება</span>
                             </div>
-                            <div class="flex flex-col sm:items-end text-xs text-gray-300 gap-1">
-                                <a href="tel:598323044" class="hover:text-yellow-400 transition"><i class="fa-solid fa-phone mr-1.5 text-gray-500"></i>598 32 30 44</a>
-                                <a href="mailto:nikolozgvelesiani910@gmail.com" class="hover:text-yellow-400 transition"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i>nikolozgvelesiani910@gmail.com</a>
+                            <div class="flex flex-col sm:items-end text-xs text-slate-600 gap-1">
+                                <a href="tel:598323044" class="hover:text-amber-600 transition"><i class="fa-solid fa-phone mr-1.5 text-slate-400"></i>598 32 30 44</a>
+                                <a href="mailto:nikolozgvelesiani910@gmail.com" class="hover:text-amber-600 transition"><i class="fa-solid fa-envelope mr-1.5 text-slate-400"></i>nikolozgvelesiani910@gmail.com</a>
                             </div>
                         </div>
 
                         <!-- Member 5 -->
                         <div class="py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                             <div>
-                                <h4 class="font-bold text-white text-base">თეკლა ჩოგოვაძე</h4>
-                                <span class="text-xs text-pink-400" data-ka="ბრენდინგისა და კრეატიული მიმართულების ლიდერი" data-en="Branding & Creative Direction Lead">ბრენდინგისა და კრეატიული მიმართულების ლიდერი</span>
+                                <h4 class="font-bold text-slate-900 text-base">თეკლა ჩოგოვაძე</h4>
+                                <span class="text-xs text-pink-700 font-semibold" data-ka="ბრენდინგისა და კრეატიული მიმართულების ლიდერი" data-en="Branding & Creative Direction Lead">ბრენდინგისა და კრეატიული მიმართულების ლიდერი</span>
                             </div>
-                            <div class="flex flex-col sm:items-end text-xs text-gray-300 gap-1">
-                                <a href="tel:599177442" class="hover:text-pink-400 transition"><i class="fa-solid fa-phone mr-1.5 text-gray-500"></i>599 17 74 42</a>
-                                <a href="mailto:tekla0401@gmail.com" class="hover:text-pink-400 transition"><i class="fa-solid fa-envelope mr-1.5 text-gray-500"></i>tekla0401@gmail.com</a>
+                            <div class="flex flex-col sm:items-end text-xs text-slate-600 gap-1">
+                                <a href="tel:599177442" class="hover:text-pink-600 transition"><i class="fa-solid fa-phone mr-1.5 text-slate-400"></i>599 17 74 42</a>
+                                <a href="mailto:tekla0401@gmail.com" class="hover:text-pink-600 transition"><i class="fa-solid fa-envelope mr-1.5 text-slate-400"></i>tekla0401@gmail.com</a>
                             </div>
                         </div>
                     </div>
@@ -504,20 +547,20 @@
                 
                 <div class="text-center space-y-3">
                     <span class="text-brand-green font-bold text-xs uppercase tracking-widest" data-ka="ხშირად დასმული შეკითხვები" data-en="Frequently Asked Questions">ხშირად დასმული შეკითხვები</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white" data-ka="ხდკ / FAQ" data-en="FAQ / Knowledge Base">ხდკ / FAQ</h2>
-                    <p class="text-gray-400 text-sm" data-ka="გაიგეთ მეტი QSkip-ის მუშაობის პრინციპისა და ფუნქციების შესახებ." data-en="Learn more about QSkip architecture and features.">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900" data-ka="ხდკ / FAQ" data-en="FAQ / Knowledge Base">ხდკ / FAQ</h2>
+                    <p class="text-slate-600 text-sm" data-ka="გაიგეთ მეტი QSkip-ის მუშაობის პრინციპისა და ფუნქციების შესახებ." data-en="Learn more about QSkip architecture and features.">
                         გაიგეთ მეტი QSkip-ის მუშაობის პრინციპისა და ფუნქციების შესახებ.
                     </p>
                 </div>
 
                 <div class="space-y-4">
                     <!-- Q1 -->
-                    <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
-                        <button onclick="toggleFaq(1)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:bg-gray-800/50 transition">
+                    <div class="light-card rounded-2xl overflow-hidden border border-slate-200">
+                        <button onclick="toggleFaq(1)" class="w-full p-5 text-left font-bold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
                             <span data-ka="1. რა არის QSkip და როგორ მუშაობს ის?" data-en="1. What is QSkip and how does it work?">1. რა არის QSkip და როგორ მუშაობს ის?</span>
                             <i id="faq-icon-1" class="fa-solid fa-chevron-down text-brand-green transition-transform duration-200"></i>
                         </button>
-                        <div id="faq-ans-1" class="hidden p-5 pt-0 text-sm text-gray-300 border-t border-gray-800/50 leading-relaxed"
+                        <div id="faq-ans-1" class="hidden p-5 pt-0 text-sm text-slate-600 border-t border-slate-100 leading-relaxed"
                              data-ka="QSkip არის B2B2C ციფრული რიგების პლატფორმა. მომხმარებელს შეუძლია აპლიკაციიდან დისტანციურად დადგეს ნებისმიერი პარტნიორი ობიექტის (კაფე, მუზეუმი, კლინიკა) რიგში, ადევნოს თვალი პროგრესს რეალურ დროში და მივიდეს ადგილზე ზუსტად თავის ჯერზე."
                              data-en="QSkip is a B2B2C digital queue platform allowing users to join lines at partner venues remotely via app, monitor progress in real-time, and arrive right on time.">
                             QSkip არის B2B2C ციფრული რიგების პლატფორმა. მომხმარებელს შეუძლია აპლიკაციიდან დისტანციურად დადგეს ნებისმიერი პარტნიორი ობიექტის (კაფე, მუზეუმი, კლინიკა) რიგში, ადევნოს თვალი პროგრესს რეალურ დროში და მივიდეს ადგილზე ზუსტად თავის ჯერზე.
@@ -525,54 +568,54 @@
                     </div>
 
                     <!-- Q2 -->
-                    <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
-                        <button onclick="toggleFaq(2)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:bg-gray-800/50 transition">
+                    <div class="light-card rounded-2xl overflow-hidden border border-slate-200">
+                        <button onclick="toggleFaq(2)" class="w-full p-5 text-left font-bold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
                             <span data-ka="2. როგორ ითვლის ხელოვნური ინტელექტი (AI) რიგში დგომის დროს?" data-en="2. How does the AI calculate queue wait times?">2. როგორ ითვლის ხელოვნური ინტელექტი (AI) რიგში დგომის დროს?</span>
                             <i id="faq-icon-2" class="fa-solid fa-chevron-down text-brand-green transition-transform duration-200"></i>
                         </button>
-                        <div id="faq-ans-2" class="hidden p-5 pt-0 text-sm text-gray-300 border-t border-gray-800/50 leading-relaxed"
+                        <div id="faq-ans-2" class="hidden p-5 pt-0 text-sm text-slate-600 border-t border-slate-100 leading-relaxed"
                              data-ka="AI ალგორითმი აანალიზებს გზებზე არსებულ მოძრაობას (ტრაფიკს), ობიექტის მიმდინარე დატვირთვასა და მომსახურების საშუალო სიჩქარეს. Machine Learning ეხმარება მომხმარებელს ზუსტი ETA-ს მიღებაში და ადგილზე დროულად გამოცხადებაში."
                              data-en="The AI algorithm analyzes road traffic, live venue capacity, and historical service speeds to deliver exact ETA dynamic calculations.">
                             AI ალგორითმი აანალიზებს გზებზე არსებულ მოძრაობას (ტრაფიკს), ობიექტის მიმდინარე დატვირთვასა და მომსახურების საშუალო სიჩქარეს. Machine Learning ეხმარება მომხმარებელს ზუსტი ETA-ს მიღებაში და ადგილზე დროულად გამოცხადებაში.
                         </div>
                     </div>
 
-                    <!-- Q3 -->
-                    <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
-                        <button onclick="toggleFaq(3)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:bg-gray-800/50 transition">
-                            <span data-ka="3. რა არის პრიორიტეტული რიგი (Priority Queue)?" data-en="3. What is a Priority Queue?">3. რა არის პრიორიტეტული რიგი (Priority Queue)?</span>
+                    <!-- Q3 (Updated to focus on value rather than monetization) -->
+                    <div class="light-card rounded-2xl overflow-hidden border border-slate-200">
+                        <button onclick="toggleFaq(3)" class="w-full p-5 text-left font-bold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
+                            <span data-ka="3. რა უპირატესობა აქვს პრიორიტეტულ რიგს (Priority Queue)?" data-en="3. What are the advantages of Priority Queue?">3. რა უპირატესობა აქვს პრიორიტეტულ რიგს (Priority Queue)?</span>
                             <i id="faq-icon-3" class="fa-solid fa-chevron-down text-brand-green transition-transform duration-200"></i>
                         </button>
-                        <div id="faq-ans-3" class="hidden p-5 pt-0 text-sm text-gray-300 border-t border-gray-800/50 leading-relaxed"
-                             data-ka="ეს არის ფასიანი დაჩქარებული სერვისი, განსაკუთრებით მოსახერხებელი ტურისტებისთვის, რომელთაც შეზღუდული დრო აქვთ. მიღებული შემოსავალი ნაწილდება QSkip-სა და პარტნიორ ობიექტს შორის."
-                             data-en="It is a paid fast-track option ideal for time-constrained tourists and users. Generated revenue is shared between QSkip and the venue.">
-                            ეს არის ფასიანი დაჩქარებული სერვისი, განსაკუთრებით მოსახერხებელი ტურისტებისთვის, რომელთაც შეზღუდული დრო აქვთ. მიღებული შემოსავალი ნაწილდება QSkip-სა და პარტნიორ ობიექტს შორის.
+                        <div id="faq-ans-3" class="hidden p-5 pt-0 text-sm text-slate-600 border-t border-slate-100 leading-relaxed"
+                             data-ka="პრიორიტეტული რიგი შექმნილია იმ მომხმარებლებისა და ტურისტებისთვის, რომელთაც აქვთ მჭიდრო გრაფიკი და სურთ დაჩქარებული მომსახურების მიღება ობიექტზე."
+                             data-en="Priority Queuing is designed for tourists and time-constrained users who require fast-tracked entry and streamlined service.">
+                            პრიორიტეტული რიგი შექმნილია იმ მომხმარებლებისა და ტურისტებისთვის, რომელთაც აქვთ მჭიდრო გრაფიკი და სურთ დაჩქარებული მომსახურების მიღება ობიექტზე.
                         </div>
                     </div>
 
                     <!-- Q4 -->
-                    <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
-                        <button onclick="toggleFaq(4)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:bg-gray-800/50 transition">
+                    <div class="light-card rounded-2xl overflow-hidden border border-slate-200">
+                        <button onclick="toggleFaq(4)" class="w-full p-5 text-left font-bold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
                             <span data-ka="4. სჭირდება თუ არა ბიზნესს ძვირადღირებული ფიზიკური აპარატები?" data-en="4. Do businesses need expensive hardware ticket machines?">4. სჭირდება თუ არა ბიზნესს ძვირადღირებული ფიზიკური აპარატები?</span>
                             <i id="faq-icon-4" class="fa-solid fa-chevron-down text-brand-green transition-transform duration-200"></i>
                         </button>
-                        <div id="faq-ans-4" class="hidden p-5 pt-0 text-sm text-gray-300 border-t border-gray-800/50 leading-relaxed"
+                        <div id="faq-ans-4" class="hidden p-5 pt-0 text-sm text-slate-600 border-t border-slate-100 leading-relaxed"
                              data-ka="არა! QSkip არის სრულიად Cloud-ზე დაფუძნებული SaaS პლატფორმა. ბიზნესს სჭირდება მხოლოდ მართვის პანელი (პლანშეტი ან სმარტფონი), რაც მინიმუმამდე ამცირებს ხარჯებს."
                              data-en="No! QSkip is a 100% cloud-based SaaS platform requiring zero dedicated ticket printing hardware. Venues manage everything from a simple dashboard.">
                             არა! QSkip არის სრულიად Cloud-ზე დაფუძნებული SaaS პლატფორმა. ბიზნესს სჭირდება მხოლოდ მართვის პანელი (პლანშეტი ან სმარტფონი), რაც მინიმუმამდე ამცირებს ხარჯებს.
                         </div>
                     </div>
 
-                    <!-- Q5 -->
-                    <div class="glass-card rounded-2xl overflow-hidden border border-gray-800">
-                        <button onclick="toggleFaq(5)" class="w-full p-5 text-left font-bold text-white flex justify-between items-center hover:bg-gray-800/50 transition">
-                            <span data-ka="5. უფასოა თუ არა QSkip მომხმარებლებისთვის?" data-en="5. Is QSkip free for standard users?">5. უფასოა თუ არა QSkip მომხმარებლებისთვის?</span>
+                    <!-- Q5 (Updated to focus on accessibility) -->
+                    <div class="light-card rounded-2xl overflow-hidden border border-slate-200">
+                        <button onclick="toggleFaq(5)" class="w-full p-5 text-left font-bold text-slate-900 flex justify-between items-center hover:bg-slate-50 transition">
+                            <span data-ka="5. რამდენად მარტივია აპლიკაციის გამოყენება მომხმარებლებისთვის?" data-en="5. How accessible is QSkip for daily users?">5. რამდენად მარტივია აპლიკაციის გამოყენება მომხმარებლებისთვის?</span>
                             <i id="faq-icon-5" class="fa-solid fa-chevron-down text-brand-green transition-transform duration-200"></i>
                         </button>
-                        <div id="faq-ans-5" class="hidden p-5 pt-0 text-sm text-gray-300 border-t border-gray-800/50 leading-relaxed"
-                             data-ka="დიახ, სტანდარტულ რიგში დისტანციურად ჩაწერა მომხმარებლებისთვის სრულიად უფასოა. მხოლოდ პრიორიტეტული (დაჩქარებული) რიგით სარგებლობისას მოქმედებს მცირე საფასური."
-                             data-en="Yes, joining standard digital queues remotely is completely free for users. Only optional Priority Queue passes incur a small fee.">
-                            დიახ, სტანდარტულ რიგში დისტანციურად ჩაწერა მომხმარებლებისთვის სრულიად უფასოა. მხოლოდ პრიორიტეტული (დაჩქარებული) რიგით სარგებლობისას მოქმედებს მცირე საფასური.
+                        <div id="faq-ans-5" class="hidden p-5 pt-0 text-sm text-slate-600 border-t border-slate-100 leading-relaxed"
+                             data-ka="აპლიკაცია შექმნილია მაქსიმალურად ინტუიციური ინტერფეისით. რიგში ჩასაწერად საკმარისია QR კოდის დასკანერება ან ობიექტის მოძებნა აპლიკაციაში, ყოველგვარი რთული პროცედურების გარეშე."
+                             data-en="The application features an intuitive layout. Joining a queue is as simple as scanning a QR code or selecting a venue in the app, with no complex setup.">
+                            აპლიკაცია შექმნილია მაქსიმალურად ინტუიციური ინტერფეისით. რიგში ჩასაწერად საკმარისია QR კოდის დასკანერება ან ობიექტის მოძებნა აპლიკაციაში, ყოველგვარი რთული პროცედურების გარეშე.
                         </div>
                     </div>
                 </div>
@@ -583,14 +626,14 @@
     </main>
 
     <!-- FOOTER SECTION -->
-    <footer class="border-t border-gray-800/80 glass-card mt-12 py-8">
+    <footer class="border-t border-slate-200 bg-white mt-12 py-8">
         <div class="max-w-7xl mx-auto px-4 text-center space-y-4">
-            <div class="flex justify-center items-center gap-6 text-gray-400">
-                <a href="https://instagram.com/qskip.app" target="_blank" class="hover:text-pink-400 transition text-lg"><i class="fa-brands fa-instagram"></i></a>
-                <a href="mailto:contact@qskip.ge" class="hover:text-brand-green transition text-lg"><i class="fa-solid fa-envelope"></i></a>
+            <div class="flex justify-center items-center gap-6 text-slate-500">
+                <a href="https://instagram.com/qskip.app" target="_blank" class="hover:text-pink-600 transition text-lg"><i class="fa-brands fa-instagram"></i></a>
+                <a href="mailto:contact@qskip.ge" class="hover:text-emerald-600 transition text-lg"><i class="fa-solid fa-envelope"></i></a>
             </div>
-            <p class="text-xs text-gray-500 font-medium">
-                © 2026 QSkip. ყველა უფლება დაცულია. შექმნილია ფიზმათGPT-ის მიერ.</span>
+            <p class="text-xs text-slate-500 font-medium">
+                © 2026 QSkip. ყველა უფლება დაცულია. შექმნილია ფიზმათGPT-ის მიერ.
             </p>
         </div>
     </footer>
@@ -603,8 +646,8 @@
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-brand-green', 'bg-gray-800/60');
-                btn.classList.add('text-gray-300');
+                btn.classList.remove('text-brand-green', 'bg-emerald-50', 'border', 'border-emerald-100');
+                btn.classList.add('text-slate-600');
             });
 
             const targetTab = document.getElementById('tab-' + tabId);
@@ -612,8 +655,8 @@
 
             if (targetTab) targetTab.classList.add('active');
             if (targetNav) {
-                targetNav.classList.remove('text-gray-300');
-                targetNav.classList.add('text-brand-green', 'bg-gray-800/60');
+                targetNav.classList.remove('text-slate-600');
+                targetNav.classList.add('text-brand-green', 'bg-emerald-50', 'border', 'border-emerald-100');
             }
 
             // Scroll smoothly to top on tab change
@@ -653,17 +696,24 @@
             }
         }
 
-        // Render Chart.js Monetization Graph
+        // Render Chart.js Abandonment Graph
         window.addEventListener('DOMContentLoaded', () => {
-            const ctx = document.getElementById('monetizationChart');
+            const ctx = document.getElementById('abandonmentChart');
             if (ctx) {
                 new Chart(ctx, {
-                    type: 'doughnut',
+                    type: 'bar',
                     data: {
-                        labels: ['B2B SaaS Subscription', 'Priority Queues Split', 'Sponsored Map Placement'],
+                        labels: ['0-3 წთ', '3-5 წთ', '5-10 წთ', '10+ წთ'],
                         datasets: [{
-                            data: [45, 35, 20],
-                            backgroundColor: ['#22C55E', '#0066FF', '#EAB308'],
+                            label: 'რიგის მიტოვების %',
+                            data: [5, 25, 59, 73],
+                            backgroundColor: [
+                                '#22C55E',
+                                '#2563EB',
+                                '#F59E0B',
+                                '#EF4444'
+                            ],
+                            borderRadius: 8,
                             borderWidth: 0
                         }]
                     },
@@ -672,10 +722,36 @@
                         maintainAspectRatio: false,
                         plugins: {
                             legend: {
-                                position: 'bottom',
-                                labels: {
-                                    color: '#9CA3AF',
-                                    font: { family: 'Inter', size: 11 }
+                                display: false
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.raw + '% მომხმარებელი ტოვებს რიგს';
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    },
+                                    color: '#64748B'
+                                },
+                                grid: {
+                                    color: '#E2E8F0'
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    color: '#64748B'
+                                },
+                                grid: {
+                                    display: false
                                 }
                             }
                         }
