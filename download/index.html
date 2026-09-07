@@ -1,106 +1,333 @@
-<section class="max-w-4xl mx-auto px-4 py-12">
-    <div class="text-center mb-10">
-        <h1 class="text-3xl font-extrabold text-slate-900 mb-3" data-ka="აპლიკაციის ინსტალაცია" data-en="Install QSkip App">
-            Install QSkip App
-        </h1>
-        <p class="text-slate-600 text-base max-w-lg mx-auto" data-ka="დააყენეთ QSkip პირდაპირ თქვენს ეკრანზე აპლიკაციების მაღაზიის გარეშე" data-en="Add QSkip directly to your home screen without needing an app store">
-            Add QSkip directly to your home screen without needing an app store
-        </p>
-    </div>
+<!DOCTYPE html>
+<html lang="ka" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSkip - აპის ინსტალაციის ინსტრუქცია | App Installation Guide</title>
+    
+    <!-- FAVICON FIX FOR GOOGLE SEARCH -->
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    
+    <!-- Meta tags for SEO & Social Sharing -->
+    <meta name="description" content="QSkip - ინსტრუქცია, თუ როგორ დააინსტალიროთ QSkip Web App თქვენს სმარტფონზე. / Step-by-step guide on how to install QSkip Web App on your smartphone.">
+    <meta property="og:title" content="QSkip - PWA ინსტალაციის ინსტრუქცია / PWA Installation Guide">
+    <meta property="og:description" content="Quick step-by-step guide to install QSkip as a Progressive Web App on iOS and Android.">
+    <meta property="og:image" content="/banner.png">
+    <meta property="og:type" content="website">
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <!-- iOS (Safari) Instructions -->
-        <div class="light-card p-6 rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col justify-between">
-            <div>
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-800 text-xl">
-                        <i class="fa-brands fa-apple"></i>
-                    </div>
-                    <div>
-                        <h2 class="font-bold text-lg text-slate-900">iOS (iPhone / iPad)</h2>
-                        <p class="text-xs text-slate-500">Safari Browser</p>
+    <!-- Invisible Scrollbar -->
+    <style>
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        display: none;
+      }
+    
+      /* Hide scrollbar for IE, Edge and Firefox */
+      html, body {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
+    </style>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            lightBg: '#F8FAFC',
+                            card: '#FFFFFF',
+                            green: '#16A34A',
+                            greenHover: '#15803D',
+                            blue: '#2563EB',
+                            accent: '#3B82F6',
+                            textPrimary: '#0F172A',
+                            textSecondary: '#475569'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Noto Sans Georgian', 'Inter', sans-serif;
+            background-color: #F8FAFC;
+            color: #0F172A;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .light-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased">
+
+    <!-- TOP RIBBON NAVIGATION -->
+    <header class="bg-white text-slate-900 border-b border-slate-200 sticky top-0 z-50 shadow-sm w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo Section -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <img src="logo.png" alt="QSkip Logo" class="h-14 w-auto object-contain transition-transform group-hover:scale-105" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50/F8FAFC/16A34A?text=QSkip';">
+            </a>
+
+            <!-- Navigation Links Ribbon -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                <button onclick="switchTab('ios')" id="nav-ios" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-brand-green bg-emerald-50 border border-emerald-100">
+                    <i class="fa-brands fa-apple mr-2"></i><span data-ka="iOS (Safari)" data-en="iOS (Safari)">iOS (Safari)</span>
+                </button>
+                <button onclick="switchTab('android')" id="nav-android" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <i class="fa-brands fa-android mr-2"></i><span data-ka="Android (Chrome)" data-en="Android (Chrome)">Android (Chrome)</span>
+                </button>
+                <button onclick="switchTab('desktop')" id="nav-desktop" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100">
+                    <i class="fa-solid fa-desktop mr-2"></i><span data-ka="Desktop" data-en="Desktop">Desktop</span>
+                </button>
+            </nav>
+
+            <!-- Language Switcher & Mobile Menu Trigger -->
+            <div class="flex items-center gap-3">
+                <button onclick="toggleLanguage()" id="lang-btn" class="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-slate-100 hover:bg-slate-200 text-emerald-700 border border-slate-200 transition flex items-center gap-2">
+                    <i class="fa-solid fa-globe"></i> <span id="lang-label">EN</span>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-slate-900 p-2">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2 shadow-lg">
+            <button onclick="switchTab('ios'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-slate-800 hover:bg-slate-100 flex items-center gap-3">
+                <i class="fa-brands fa-apple text-brand-green"></i> <span data-ka="iOS (Safari)" data-en="iOS (Safari)">iOS (Safari)</span>
+            </button>
+            <button onclick="switchTab('android'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-slate-800 hover:bg-slate-100 flex items-center gap-3">
+                <i class="fa-brands fa-android text-brand-blue"></i> <span data-ka="Android (Chrome)" data-en="Android (Chrome)">Android (Chrome)</span>
+            </button>
+            <button onclick="switchTab('desktop'); toggleMobileMenu()" class="w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium text-slate-800 hover:bg-slate-100 flex items-center gap-3">
+                <i class="fa-solid fa-desktop text-purple-600"></i> <span data-ka="Desktop" data-en="Desktop">Desktop</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+
+        <!-- HEADER SECTION -->
+        <div class="text-center max-w-3xl mx-auto mb-10 space-y-3">
+            <span class="inline-block px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200"
+                  data-ka='<i class="fa-solid fa-download mr-1.5"></i> PWA ინსტალაცია'
+                  data-en='<i class="fa-solid fa-download mr-1.5"></i> PWA Installation'>
+                <i class="fa-solid fa-download mr-1.5"></i> PWA ინსტალაცია
+            </span>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight"
+                data-ka="როგორ დავაინსტალიროთ QSkip Web App"
+                data-en="How to Install QSkip Web App">
+                როგორ დავაინსტალიროთ QSkip Web App
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600"
+               data-ka="მიჰყევით მარტივ ნაბიჯებს QSkip-ის თქვენს ეკრანზე დასამატებლად, აპლიკაციების მაღაზიის გარეშე."
+               data-en="Follow simple steps to add QSkip directly to your home screen without downloading from an App Store.">
+                მიჰყევით მარტივ ნაბიჯებს QSkip-ის თქვენს ეკრანზე დასამატებლად, აპლიკაციების მაღაზიის გარეშე.
+            </p>
+        </div>
+
+        <!-- ==================== IOS TAB ==================== -->
+        <section id="tab-ios" class="tab-content active transition-opacity duration-300">
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="p-6 rounded-2xl bg-slate-900 text-white flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-apple text-4xl text-emerald-400"></i>
+                        <div>
+                            <h2 class="text-xl font-bold" data-ka="ინსტალაცია iPhone / iPad-ზე" data-en="Installation on iPhone / iPad">ინსტალაცია iPhone / iPad-ზე</h2>
+                            <p class="text-xs text-slate-400" data-ka="მოითხოვს Safari ბრაუზერს" data-en="Requires Safari Browser">მოითხოვს Safari ბრაუზერს</p>
+                        </div>
                     </div>
                 </div>
 
-                <ol class="space-y-4 text-sm text-slate-700">
-                    <li class="flex items-start gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 font-semibold text-xs flex items-center justify-center text-slate-600">1</span>
-                        <span data-ka="გახსენით qskip.ge Safari ბრაუზერში." data-en="Open qskip.ge in the Safari browser.">
-                            Open <strong>qskip.ge</strong> in the Safari browser.
-                        </span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 font-semibold text-xs flex items-center justify-center text-slate-600">2</span>
-                        <span data-ka="დააჭირეთ „გაზიარების“ ღილაკს (ეკრანის ქვედა ნაწილში)." data-en="Tap the 'Share' icon (at the bottom of your screen).">
-                            Tap the <strong>Share</strong> button <i class="fa-solid fa-share-from-square text-brand-blue mx-1"></i>.
-                        </span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 font-semibold text-xs flex items-center justify-center text-slate-600">3</span>
-                        <span data-ka="ჩამოასქროლეთ და აირჩიეთ „მთავარ ეკრანზე დამატება“." data-en="Scroll down and tap 'Add to Home Screen'.">
-                            Scroll down and tap <strong>Add to Home Screen</strong> <i class="fa-regular fa-square-plus text-slate-800 mx-1"></i>.
-                        </span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 font-semibold text-xs flex items-center justify-center text-slate-600">4</span>
-                        <span data-ka="დააჭირეთ „დამატებას“ ზედა მარჯვენა კუთხეში." data-en="Tap 'Add' in the top-right corner.">
-                            Tap <strong>Add</strong> in the top-right corner.
-                        </span>
-                    </li>
-                </ol>
-            </div>
-
-            <a href="https://qskip-app.lovable.app" class="mt-6 w-full py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
-                <span data-ka="გახსენი Safari-ში" data-en="Open in Safari">Open in Safari</span>
-            </a>
-        </div>
-
-        <!-- Android (Chrome) Instructions -->
-        <div class="light-card p-6 rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col justify-between">
-            <div>
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 text-xl">
-                        <i class="fa-brands fa-android"></i>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Step 1 -->
+                    <div class="p-6 rounded-2xl light-card space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-brand-green font-extrabold flex items-center justify-center text-lg border border-emerald-100">1</div>
+                        <h3 class="font-bold text-slate-900" data-ka="გახსენით Safari-ში" data-en="Open in Safari">გახსენით Safari-ში</h3>
+                        <p class="text-sm text-slate-600" data-ka="გახსენით Safari ბრაუზერი და ეწვიეთ QSkip Web App-ის ბმულს." data-en="Open the Safari browser on your iOS device and navigate to the QSkip Web App.">გახსენით Safari ბრაუზერი და ეწვიეთ QSkip Web App-ის ბმულს.</p>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-500 font-mono text-center">qskip-app.lovable.app</div>
                     </div>
-                    <div>
-                        <h2 class="font-bold text-lg text-slate-900">Android</h2>
-                        <p class="text-xs text-slate-500">Chrome Browser</p>
+
+                    <!-- Step 2 -->
+                    <div class="p-6 rounded-2xl light-card space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-brand-green font-extrabold flex items-center justify-center text-lg border border-emerald-100">2</div>
+                        <h3 class="font-bold text-slate-900" data-ka="დააჭირეთ Share-ს" data-en="Tap Share">დააჭირეთ Share-ს</h3>
+                        <p class="text-sm text-slate-600" data-ka="ეკრანის ქვედა მენიუში დააჭირეთ 'Share' (გაზიარების) ღილაკს." data-en="Tap the 'Share' icon located at the bottom navigation bar of Safari.">ეკრანის ქვედა მენიუში დააჭირეთ 'Share' (გაზიარების) ღილაკს.</p>
+                        <div class="text-center py-2 text-brand-blue text-2xl"><i class="fa-solid fa-share-from-square"></i></div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="p-6 rounded-2xl light-card space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-brand-green font-extrabold flex items-center justify-center text-lg border border-emerald-100">3</div>
+                        <h3 class="font-bold text-slate-900" data-ka="დაამატეთ ეკრანზე" data-en="Add to Home Screen">დაამატეთ ეკრანზე</h3>
+                        <p class="text-sm text-slate-600" data-ka="ჩამოკრიფეთ მენიუ და აირჩიეთ 'Add to Home Screen' (მთავარ ეკრანზე დამატება)." data-en="Scroll down the share menu and select 'Add to Home Screen'.">ჩამოკრიფეთ მენიუ და აირჩიეთ 'Add to Home Screen' (მთავარ ეკრანზე დამატება).</p>
+                        <div class="text-center py-2 text-brand-green text-2xl"><i class="fa-solid fa-square-plus"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== ANDROID TAB ==================== -->
+        <section id="tab-android" class="tab-content transition-opacity duration-300">
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="p-6 rounded-2xl bg-slate-900 text-white flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-android text-4xl text-emerald-400"></i>
+                        <div>
+                            <h2 class="text-xl font-bold" data-ka="ინსტალაცია Android-ზე" data-en="Installation on Android">ინსტალაცია Android-ზე</h2>
+                            <p class="text-xs text-slate-400" data-ka="მოითხოვს Google Chrome ბრაუზერს" data-en="Requires Google Chrome Browser">მოითხოვს Google Chrome ბრაუზერს</p>
+                        </div>
                     </div>
                 </div>
 
-                <ol class="space-y-4 text-sm text-slate-700">
-                    <li class="flex items-start gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 font-semibold text-xs flex items-center justify-center text-slate-600">1</span>
-                        <span data-ka="გახსენით qskip.ge Google Chrome ბრაუზერში." data-en="Open qskip.ge in Google Chrome.">
-                            Open <strong>qskip.ge</strong> in Google Chrome.
-                        </span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 font-semibold text-xs flex items-center justify-center text-slate-600">2</span>
-                        <span data-ka="დააჭირეთ სამ წერტილს (⋮) ზედა მარჯვენა კუთხეში." data-en="Tap the three dots (⋮) in the top-right corner.">
-                            Tap the <strong>three dots (⋮)</strong> menu.
-                        </span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 font-semibold text-xs flex items-center justify-center text-slate-600">3</span>
-                        <span data-ka="აირჩიეთ „აპლიკაციის ინსტალაცია“ ან „მთავარ ეკრანზე დამატება“." data-en="Select 'Install app' or 'Add to Home screen'.">
-                            Tap <strong>Install app</strong> or <strong>Add to Home screen</strong>.
-                        </span>
-                    </li>
-                    <li class="flex items-start gap-3">
-                        <span class="flex-shrink-0 w-6 h-6 rounded-full bg-slate-100 font-semibold text-xs flex items-center justify-center text-slate-600">4</span>
-                        <span data-ka="მიჰყევით ეკრანზე გამოჩენილ მითითებას ინსტალაციის დასასრულებლად." data-en="Follow the on-screen prompt to complete installation.">
-                            Confirm by tapping <strong>Install</strong>.
-                        </span>
-                    </li>
-                </ol>
-            </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Step 1 -->
+                    <div class="p-6 rounded-2xl light-card space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue font-extrabold flex items-center justify-center text-lg border border-blue-100">1</div>
+                        <h3 class="font-bold text-slate-900" data-ka="გახსენით Chrome-ში" data-en="Open in Chrome">გახსენით Chrome-ში</h3>
+                        <p class="text-sm text-slate-600" data-ka="გახსენით Google Chrome და გადადით QSkip-ის ვებ გვერდზე." data-en="Open Google Chrome on your device and visit the QSkip Web App.">გახსენით Google Chrome და გადადით QSkip-ის ვებ გვერდზე.</p>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-500 font-mono text-center">qskip-app.lovable.app</div>
+                    </div>
 
-            <a href="https://qskip-app.lovable.app" class="mt-6 w-full py-3 rounded-xl bg-brand-green hover:bg-brand-greenHover text-white font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-emerald-600/10">
-                <i class="fa-solid fa-mobile-screen text-xs"></i>
-                <span data-ka="გახსენი Chrome-ში" data-en="Open App in Chrome">Open App in Chrome</span>
+                    <!-- Step 2 -->
+                    <div class="p-6 rounded-2xl light-card space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue font-extrabold flex items-center justify-center text-lg border border-blue-100">2</div>
+                        <h3 class="font-bold text-slate-900" data-ka="გახსენით მენიუ" data-en="Open Menu">გახსენით მენიუ</h3>
+                        <p class="text-sm text-slate-600" data-ka="დააჭირეთ ზედა მარჯვენა კუთხეში არსებულ სამ წერტილს (⋮)." data-en="Tap the three vertical dots (⋮) in the top-right corner of the browser screen.">დააჭირეთ ზედა მარჯვენა კუთხეში არსებულ სამ წერტილს (⋮).</p>
+                        <div class="text-center py-2 text-slate-700 text-2xl"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="p-6 rounded-2xl light-card space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-blue-50 text-brand-blue font-extrabold flex items-center justify-center text-lg border border-blue-100">3</div>
+                        <h3 class="font-bold text-slate-900" data-ka="დააინსტალირეთ" data-en="Install App">დააინსტალირეთ</h3>
+                        <p class="text-sm text-slate-600" data-ka="აირჩიეთ 'Install app' ან 'Add to Home screen' და დაადასტურეთ." data-en="Select 'Install app' or 'Add to Home screen' and confirm installation.">აირჩიეთ 'Install app' ან 'Add to Home screen' და დაადასტურეთ.</p>
+                        <div class="text-center py-2 text-brand-blue text-2xl"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== DESKTOP TAB ==================== -->
+        <section id="tab-desktop" class="tab-content transition-opacity duration-300">
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="p-6 rounded-2xl bg-slate-900 text-white flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-solid fa-desktop text-4xl text-emerald-400"></i>
+                        <div>
+                            <h2 class="text-xl font-bold" data-ka="ინსტალაცია კომპიუტერზე" data-en="Installation on Desktop">ინსტალაცია კომპიუტერზე</h2>
+                            <p class="text-xs text-slate-400" data-ka="Chrome, Edge, ან Brave ბრაუზერები" data-en="Chrome, Edge, or Brave Browsers">Chrome, Edge, ან Brave ბრაუზერები</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Step 1 -->
+                    <div class="p-6 rounded-2xl light-card space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 font-extrabold flex items-center justify-center text-lg border border-purple-100">1</div>
+                        <h3 class="font-bold text-slate-900" data-ka="ინსტალაციის ღილაკი მისამართების ზოლში" data-en="Install Icon in Address Bar">ინსტალაციის ღილაკი მისამართების ზოლში</h3>
+                        <p class="text-sm text-slate-600" data-ka="ბრაუზერის მისამართების ზოლის მარჯვენა მხარეს დააჭირეთ ინსტალაციის ხატულას." data-en="Click the install icon located on the right side of the browser address bar.">ბრაუზერის მისამართების ზოლის მარჯვენა მხარეს დააჭირეთ ინსტალაციის ხატულას.</p>
+                        <div class="text-center py-2 text-purple-600 text-2xl"><i class="fa-solid fa-circle-down"></i></div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="p-6 rounded-2xl light-card space-y-4">
+                        <div class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 font-extrabold flex items-center justify-center text-lg border border-purple-100">2</div>
+                        <h3 class="font-bold text-slate-900" data-ka="დაადასტურეთ ინსტალაცია" data-en="Confirm Installation">დაადასტურეთ ინსტალაცია</h3>
+                        <p class="text-sm text-slate-600" data-ka="გამოჩენილ ფანჯარაში დააჭირეთ 'Install' ღილაკს. QSkip გაეხსნება ცალკე აპლიკაციის ფანჯარაში." data-en="Click 'Install' in the prompt window. QSkip will open as an independent desktop application.">გამოჩენილ ფანჯარაში დააჭირეთ 'Install' ღილაკს. QSkip გაეხსნება ცალკე აპლიკაციის ფანჯარაში.</p>
+                        <div class="text-center py-2 text-brand-green text-2xl"><i class="fa-solid fa-circle-check"></i></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Direct Launch -->
+        <div class="mt-12 text-center">
+            <a href="https://qskip-app.lovable.app" class="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-brand-green hover:bg-brand-greenHover text-white font-bold text-base transition-all duration-200 shadow-lg shadow-emerald-600/20">
+                <i class="fa-solid fa-rocket text-lg"></i>
+                <span data-ka="გახსენი QSkip Web App" data-en="Launch QSkip Web App">გახსენი QSkip Web App</span>
             </a>
         </div>
-    </div>
-</section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 text-center text-xs text-slate-500">
+        <p data-ka="© 2026 QSkip. ყველა უფლება დაცულია." data-en="© 2026 QSkip. All rights reserved.">© 2026 QSkip. ყველა უფლება დაცულია.</p>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        let currentLang = 'ka';
+
+        // Language Switcher Logic
+        function toggleLanguage() {
+            currentLang = currentLang === 'ka' ? 'en' : 'ka';
+            document.getElementById('lang-label').innerText = currentLang === 'ka' ? 'EN' : 'KA';
+            
+            // Toggle data attributes
+            document.querySelectorAll('[data-ka]').forEach(el => {
+                const text = el.getAttribute(`data-${currentLang}`);
+                if (text) el.innerHTML = text;
+            });
+        }
+
+        // Tab Switcher Logic
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Deactivate all nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = "nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-slate-600 hover:text-slate-900 hover:bg-slate-100";
+            });
+
+            // Show current tab
+            const targetTab = document.getElementById(`tab-${tabId}`);
+            if (targetTab) targetTab.classList.add('active');
+
+            // Activate current nav button
+            const targetNav = document.getElementById(`nav-${tabId}`);
+            if (targetNav) {
+                targetNav.className = "nav-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200 text-brand-green bg-emerald-50 border border-emerald-100";
+            }
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
