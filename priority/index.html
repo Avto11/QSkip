@@ -74,23 +74,23 @@
 
     .option-card {
       background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--accent-gold);
       border-radius: 16px;
       padding: 20px;
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.05);
     }
 
     .option-card.interactive {
       cursor: pointer;
-      border-color: rgba(212, 175, 55, 0.4);
     }
 
     .option-card.interactive:hover, .option-card.interactive:active {
-      border-color: var(--accent-gold);
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.15);
     }
 
     .option-header {
@@ -133,15 +133,30 @@
       font-weight: 600;
     }
 
+    /* FOOTER / CONTACT CARD */
+    .contact-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--accent-gold);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 20px;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.1);
+    }
+
     .contact-info {
-      font-size: 13px;
-      color: var(--text-muted);
+      font-size: 15px;
+      color: #ffffff;
     }
 
     .contact-info a {
       color: var(--accent-gold);
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
     }
 
     /* CALCULATOR VIEW DESIGN */
@@ -169,7 +184,7 @@
 
     .calculator-card {
       background-color: var(--card-bg);
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--accent-gold);
       border-radius: 20px;
       padding: 24px;
       box-shadow: 0 12px 32px rgba(0,0,0,0.6);
@@ -292,9 +307,6 @@
               <span class="price-badge">15₾/თვეში</span>
             </div>
           </div>
-          <div class="contact-info">
-            შეძენისთვის დაგვიკავშირდით: <a href="mailto:contact@qskip.ge">contact@qskip.ge</a>
-          </div>
         </div>
 
         <!-- Option 2: One-time Dynamic Pass -->
@@ -305,9 +317,13 @@
           <div class="action-prompt">
             <span>ნახეთ კალკულატორი და გრაფიკი</span> &rarr;
           </div>
-          <div class="contact-info">
-            შეძენისთვის დაგვიკავშირდით: <a href="mailto:contact@qskip.ge" onclick="event.stopPropagation()">contact@qskip.ge</a>
-          </div>
+        </div>
+      </div>
+
+      <!-- Footer Contact Card -->
+      <div class="contact-card">
+        <div class="contact-info">
+          შეძენისთვის დაგვიკავშირდით: <a href="mailto:contact@qskip.ge">contact@qskip.ge</a>
         </div>
       </div>
     </div>
