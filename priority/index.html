@@ -1,76 +1,212 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QSkip - Interactive Pricing Calculator & Graph</title>
+  <title>QSkip Priority Pass - qskip.ge/priority</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+    :root {
+      --bg-dark: #0c1017;
+      --card-bg: #141923;
+      --card-border: #1f2838;
+      --accent-gold: #d4af37;
+      --accent-gold-bg: #262112;
+      --accent-green: #2ECC71;
+      --accent-blue: #0062E6;
+      --text-muted: #8a99ad;
+    }
+
     body {
-      background-color: #0c1017;
+      background-color: var(--bg-dark);
       color: #ffffff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       margin: 0;
-      padding: 20px;
+      padding: 24px 16px;
       box-sizing: border-box;
     }
-    .card {
-      background-color: #141923;
-      border: 1px solid #1f2838;
+
+    .main-container {
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+
+    /* Diagram Section */
+    .diagram-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .root-node {
+      background-color: var(--accent-gold-bg);
+      border: 2px solid var(--accent-gold);
+      border-radius: 16px;
+      padding: 16px 36px;
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+    }
+
+    /* Tree Branch Connectors */
+    .tree-line-v {
+      width: 2px;
+      height: 24px;
+      background-color: var(--accent-gold);
+    }
+
+    .tree-line-h-wrapper {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .tree-line-h {
+      width: 100%;
+      height: 2px;
+      background-color: var(--accent-gold);
+    }
+
+    .tree-branches {
+      width: 60%;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Option Cards */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      width: 100%;
+    }
+
+    .option-card {
+      background-color: var(--card-bg);
+      border: 2px solid var(--accent-gold);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+    }
+
+    .option-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+    }
+
+    .option-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .price-strike {
+      text-decoration: line-through;
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-right: 4px;
+    }
+
+    .price-tag {
+      font-size: 26px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-top: 4px;
+    }
+
+    .contact-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+
+    .contact-note a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .contact-note a:hover {
+      text-decoration: underline;
+    }
+
+    /* Calculator Card (Hidden by default) */
+    .calculator-card {
+      display: none;
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
       border-radius: 20px;
       padding: 28px;
       box-shadow: 0 12px 32px rgba(0,0,0,0.6);
       width: 100%;
-      max-width: 750px;
       box-sizing: border-box;
+      animation: fadeIn 0.4s ease-out forwards;
     }
-    h2 {
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .calculator-card h2 {
       margin-top: 0;
       margin-bottom: 20px;
       color: #ffffff;
       text-align: center;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
     }
-    
-    /* Input and Price Display Section */
+
     .calculator-box {
       background-color: #1b2332;
       border: 1px solid #2a364d;
       border-radius: 14px;
       padding: 20px;
       display: flex;
-      flex-direction: row;
       justify-content: space-between;
       align-items: center;
       gap: 20px;
       margin-bottom: 24px;
     }
+
     .input-group {
       display: flex;
       flex-direction: column;
       gap: 8px;
       flex: 1;
     }
+
     .input-group label {
-      color: #8a99ad;
+      color: var(--text-muted);
       font-size: 13px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-    .input-wrapper {
-      display: flex;
-      align-items: center;
-    }
+
     .input-wrapper input {
-      background-color: #0c1017;
-      border: 2px solid #0062E6;
+      background-color: var(--bg-dark);
+      border: 2px solid var(--accent-blue);
       border-radius: 10px;
       color: #ffffff;
       font-size: 20px;
@@ -81,39 +217,46 @@
       transition: border-color 0.2s, box-shadow 0.2s;
       box-sizing: border-box;
     }
+
     .input-wrapper input:focus {
-      border-color: #2ECC71;
+      border-color: var(--accent-green);
       box-shadow: 0 0 10px rgba(46, 204, 113, 0.3);
     }
-    
-    /* Price Result Display */
+
     .price-display {
-      background-color: #0c1017;
-      border: 1px solid #2ECC71;
+      background-color: var(--bg-dark);
+      border: 1px solid var(--accent-green);
       border-radius: 10px;
       padding: 10px 20px;
       text-align: right;
       min-width: 150px;
     }
+
     .price-display .label {
-      color: #8a99ad;
+      color: var(--text-muted);
       font-size: 11px;
       font-weight: 600;
       text-transform: uppercase;
     }
+
     .price-display .value {
-      color: #2ECC71;
+      color: var(--accent-green);
       font-size: 26px;
       font-weight: 800;
     }
 
-    /* Canvas styling */
     .chart-container {
       position: relative;
       width: 100%;
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+      .tree-line-h-wrapper, .tree-branches {
+        display: none;
+      }
       .calculator-box {
         flex-direction: column;
         align-items: stretch;
@@ -126,32 +269,80 @@
 </head>
 <body>
 
-  <div class="card">
-    <h2>QSkip Dynamic Pricing</h2>
+  <div class="main-container">
     
-    <!-- TOP INPUT FIELD & PRICE RESULT -->
-    <div class="calculator-box">
-      <div class="input-group">
-        <label for="queueInput">Enter People in Queue (n)</label>
-        <div class="input-wrapper">
-          <input type="number" id="queueInput" value="25" min="0" max="100" step="1" oninput="updateCalculator()">
-        </div>
+    <!-- Flowchart Hierarchy -->
+    <div class="diagram-container">
+      <div class="root-node">პრიორიტეტული რიგები</div>
+      <div class="tree-line-v"></div>
+      <div class="tree-line-h-wrapper">
+        <div class="tree-line-h"></div>
       </div>
-      
-      <div class="price-display">
-        <div class="label">Calculated Price</div>
-        <div class="value" id="priceOutput">4.00 GEL</div>
+      <div class="tree-branches">
+        <div class="tree-line-v"></div>
+        <div class="tree-line-v"></div>
+      </div>
+
+      <div class="options-grid">
+        <!-- QSkip+ Subscription -->
+        <div class="option-card">
+          <div>
+            <div class="option-title">QSkip+</div>
+            <div>
+              <span class="price-strike">20₾/თვეში</span>
+              <div class="price-tag">15₾/თვეში</div>
+            </div>
+          </div>
+          <div class="contact-note">
+            შეძენისთვის დაგვიკავშირდით:<br>
+            <a href="mailto:contact@qskip.ge">contact@qskip.ge</a>
+          </div>
+        </div>
+
+        <!-- One-Time Dynamic Pass -->
+        <div class="option-card" onclick="toggleCalculator()">
+          <div>
+            <div class="option-title">ერთჯერადი დინამიური გადასახადი</div>
+            <div style="color: var(--accent-gold); font-size: 14px; margin-top: 8px;">
+              დააჭირეთ კალკულატორის სანახავად 👇
+            </div>
+          </div>
+          <div class="contact-note">
+            შეძენისთვის დაგვიკავშირდით:<br>
+            <a href="mailto:contact@qskip.ge">contact@qskip.ge</a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- GRAPH BELOW -->
-    <div class="chart-container">
-      <canvas id="qskipChart"></canvas>
+    <!-- Interactive Calculator -->
+    <div class="calculator-card" id="calculatorSection">
+      <h2>QSkip Dynamic Pricing</h2>
+      
+      <div class="calculator-box">
+        <div class="input-group">
+          <label for="queueInput">Enter People in Queue (n)</label>
+          <div class="input-wrapper">
+            <input type="number" id="queueInput" value="25" min="0" max="100" step="1" oninput="updateCalculator()">
+          </div>
+        </div>
+        
+        <div class="price-display">
+          <div class="label">Calculated Price</div>
+          <div class="value" id="priceOutput">4.00 GEL</div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="qskipChart"></canvas>
+      </div>
     </div>
+
   </div>
 
   <script>
-    // Exact piecewise algorithm
+    let chartInstance = null;
+
     function calculatePrice(n) {
       if (n < 0) n = 0;
       let price = 2.00;
@@ -169,101 +360,115 @@
       return price;
     }
 
-    // Populate discrete integer points (0 to 85)
-    const labels = [];
-    const dataPoints = [];
-    for (let n = 0; n <= 85; n++) {
-      labels.push(n);
-      dataPoints.push(calculatePrice(n));
+    function toggleCalculator() {
+      const calcSection = document.getElementById('calculatorSection');
+      if (calcSection.style.display === 'block') {
+        calcSection.style.display = 'none';
+      } else {
+        calcSection.style.display = 'block';
+        if (!chartInstance) {
+          initChart();
+        }
+        updateCalculator();
+        calcSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
 
-    const ctx = document.getElementById('qskipChart').getContext('2d');
+    function initChart() {
+      const labels = [];
+      const dataPoints = [];
+      for (let n = 0; n <= 85; n++) {
+        labels.push(n);
+        dataPoints.push(calculatePrice(n));
+      }
 
-    // QSkip Brand Gradients
-    const gradient = ctx.createLinearGradient(0, 0, 0, 350);
-    gradient.addColorStop(0, 'rgba(46, 204, 113, 0.35)');  // Green
-    gradient.addColorStop(0.5, 'rgba(0, 98, 230, 0.15)');  // Blue
-    gradient.addColorStop(1, 'rgba(20, 25, 35, 0.0)');
+      const ctx = document.getElementById('qskipChart').getContext('2d');
 
-    const chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'Price (GEL)',
-          data: dataPoints,
-          borderColor: '#2ECC71',
-          borderWidth: 3,
-          backgroundColor: gradient,
-          fill: true,
-          tension: 0,
-          pointRadius: 0,
-          pointHoverRadius: 8,
-          pointHoverBackgroundColor: '#2ECC71',
-          pointHoverBorderColor: '#ffffff',
-          pointHoverBorderWidth: 2
-        }]
-      },
-      options: {
-        responsive: true,
-        interaction: {
-          mode: 'index',
-          intersect: false
+      const gradient = ctx.createLinearGradient(0, 0, 0, 350);
+      gradient.addColorStop(0, 'rgba(46, 204, 113, 0.35)');
+      gradient.addColorStop(0.5, 'rgba(0, 98, 230, 0.15)');
+      gradient.addColorStop(1, 'rgba(20, 25, 35, 0.0)');
+
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Price (GEL)',
+            data: dataPoints,
+            borderColor: '#2ECC71',
+            borderWidth: 3,
+            backgroundColor: gradient,
+            fill: true,
+            tension: 0,
+            pointRadius: 0,
+            pointHoverRadius: 8,
+            pointHoverBackgroundColor: '#2ECC71',
+            pointHoverBorderColor: '#ffffff',
+            pointHoverBorderWidth: 2
+          }]
         },
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            enabled: true,
-            backgroundColor: '#1b2332',
-            titleColor: '#8a99ad',
-            bodyColor: '#2ECC71',
-            borderColor: '#0062E6',
-            borderWidth: 1.5,
-            padding: 12,
-            displayColors: false,
-            callbacks: {
-              title: (items) => `Queue Size: ${items[0].label} people`,
-              label: (item) => `Skip Price: ${item.parsed.y.toFixed(2)} GEL`
-            }
-          }
-        },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Number of People in Queue (n)',
-              color: '#8a99ad',
-              font: { size: 12, weight: 'bold' }
-            },
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-            ticks: { 
-              color: '#8a99ad',
-              callback: function(value, index) {
-                return index % 10 === 0 ? value : '';
+        options: {
+          responsive: true,
+          interaction: {
+            mode: 'index',
+            intersect: false
+          },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              enabled: true,
+              backgroundColor: '#1b2332',
+              titleColor: '#8a99ad',
+              bodyColor: '#2ECC71',
+              borderColor: '#0062E6',
+              borderWidth: 1.5,
+              padding: 12,
+              displayColors: false,
+              callbacks: {
+                title: (items) => `Queue Size: ${items[0].label} people`,
+                label: (item) => `Skip Price: ${item.parsed.y.toFixed(2)} GEL`
               }
             }
           },
-          y: {
-            title: {
-              display: true,
-              text: 'Skip Price (GEL)',
-              color: '#8a99ad',
-              font: { size: 12, weight: 'bold' }
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Number of People in Queue (n)',
+                color: '#8a99ad',
+                font: { size: 12, weight: 'bold' }
+              },
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { 
+                color: '#8a99ad',
+                callback: function(value, index) {
+                  return index % 10 === 0 ? value : '';
+                }
+              }
             },
-            grid: { color: 'rgba(255, 255, 255, 0.05)' },
-            ticks: { 
-              color: '#8a99ad',
-              callback: (value) => value.toFixed(2) + ' GEL'
-            },
-            min: 0,
-            max: 12
+            y: {
+              title: {
+                display: true,
+                text: 'Skip Price (GEL)',
+                color: '#8a99ad',
+                font: { size: 12, weight: 'bold' }
+              },
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { 
+                color: '#8a99ad',
+                callback: (value) => value.toFixed(2) + ' GEL'
+              },
+              min: 0,
+              max: 12
+            }
           }
         }
-      }
-    });
+      });
+    }
 
-    // Sync function between input box & graph display
     function updateCalculator() {
+      if (!chartInstance) return;
       const inputEl = document.getElementById('queueInput');
       let n = parseInt(inputEl.value);
 
@@ -272,19 +477,15 @@
       const price = calculatePrice(n);
       document.getElementById('priceOutput').innerText = price.toFixed(2) + ' GEL';
 
-      // Highlight point on the chart if within dataset bounds
       if (n <= 85) {
-        chart.setActiveElements([{ datasetIndex: 0, index: n }]);
-        chart.tooltip.setActiveElements([{ datasetIndex: 0, index: n }], { x: 0, y: 0 });
+        chartInstance.setActiveElements([{ datasetIndex: 0, index: n }]);
+        chartInstance.tooltip.setActiveElements([{ datasetIndex: 0, index: n }], { x: 0, y: 0 });
       } else {
-        chart.setActiveElements([]);
-        chart.tooltip.setActiveElements([], { x: 0, y: 0 });
+        chartInstance.setActiveElements([]);
+        chartInstance.tooltip.setActiveElements([], { x: 0, y: 0 });
       }
-      chart.update();
+      chartInstance.update();
     }
-
-    // Initialize default highlight on page load
-    document.addEventListener('DOMContentLoaded', updateCalculator);
   </script>
 </body>
 </html>
